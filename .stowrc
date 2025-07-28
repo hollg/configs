@@ -1,0 +1,9 @@
+# Stow configuration file
+# Ignore files that shouldn't be symlinked to home directory
+
+--ignore=install\.sh
+--ignore=setup\.sh
+--ignore=README\.md
+--ignore=colors
+--ignore=\.git
+--ignore=\.gitignore

@@ -1,0 +1,76 @@
+{
+  "mcpServers": {
+    "fetch": {
+      "args": [
+        "mcp-server-fetch"
+      ],
+      "autoApprove": [
+        "fetch"
+      ],
+      "command": "uvx"
+    },
+    "github": {
+      "autoApprove": [
+        "get_code_scanning_alert",
+        "get_commit",
+        "get_dependabot_alert",
+        "get_discussion",
+        "get_discussion_comments",
+        "get_file_contents",
+        "get_issue",
+        "get_issue_comments",
+        "get_job_logs",
+        "get_me",
+        "get_notification_details",
+        "get_pull_request",
+        "get_pull_request_comments",
+        "get_pull_request_diff",
+        "get_pull_request_files",
+        "get_pull_request_reviews",
+        "get_pull_request_status",
+        "get_secret_scanning_alert",
+        "get_tag",
+        "get_workflow_run",
+        "get_workflow_run_logs",
+        "get_workflow_run_usage",
+        "list_branches",
+        "list_code_scanning_alerts",
+        "list_commits",
+        "list_dependabot_alerts",
+        "list_discussion_categories",
+        "list_discussions",
+        "list_issues",
+        "list_notifications",
+        "list_pull_requests",
+        "list_secret_scanning_alerts",
+        "list_tags",
+        "list_workflow_jobs",
+        "list_workflow_run_artifacts",
+        "list_workflow_runs",
+        "list_workflows",
+        "search_code",
+        "search_issues",
+        "search_orgs",
+        "search_pull_requests",
+        "search_repositories",
+        "search_users"
+      ],
+      "disabled": false,
+      "headers": {
+        "Authorization": "Bearer ${cmd: echo $MCP_HUB_GH_ACCESS_TOKEN}"
+      },
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "time": {
+      "args": [
+        "mcp-server-time"
+      ],
+      "autoApprove": [
+        "get_current_time",
+        "convert_time"
+      ],
+      "command": "uvx",
+      "disabled": false
+    }
+  }
+}
