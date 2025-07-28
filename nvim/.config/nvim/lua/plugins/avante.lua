@@ -55,13 +55,6 @@ return {
 			-- add any opts here
 			provider = "copilot",
 			providers = {},
-			-- mappings = {
-			-- 	-- Disable Ctrl+n/p for history navigation to allow completion navigation
-			-- 	history = {
-			-- 		next = false, -- disable <C-n>
-			-- 		prev = false, -- disable <C-p>
-			-- 	},
-			-- },
 			-- system_prompt as function ensures LLM always has latest MCP server state
 			-- This is evaluated for every message, even in existing chats
 			system_prompt = function()
