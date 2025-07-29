@@ -6,19 +6,19 @@
 			"model": "github-copilot-gpt-4.1",
 			"temperature": 0.2,
 			"tools": {
-      	"write": true,
-      	"edit": true,
-      	"bash": true
-      }
+				"write": true,
+				"edit": true,
+				"bash": true
+			}
 		},
 		"plan": {
 			"model": "github-copilot-gpt-4.1",
 			"temperature": 0.2,
 			"tools": {
-      	"write": false,
-      	"edit": false,
-      	"bash": false
-      }
+				"write": false,
+				"edit": false,
+				"bash": false
+			}
 		}
 	}
 }

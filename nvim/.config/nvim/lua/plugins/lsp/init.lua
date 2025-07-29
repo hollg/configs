@@ -243,7 +243,9 @@ return {
 			-- for you, so that they are available from within Neovim.
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
+				"fixjson", -- Used to format json
 				"stylua", -- Used to format Lua code
+				"yamlfix", -- Used to format yaml
 			})
 			require("mason-tool-installer").setup({
 				ensure_installed = ensure_installed,
