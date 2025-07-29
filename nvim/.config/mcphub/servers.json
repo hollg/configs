@@ -1,5 +1,18 @@
 {
   "mcpServers": {
+		"AWS API MCP Server": {
+			"command": "uvx",
+			"args": [
+				"awslabs.aws-api-mcp-server@latest"
+			],
+			"env": {
+				"AWS_REGION": "eu-central-1",
+				"AWS_API_MCP_WORKING_DIR": "/Users/gbgarhol"
+			},
+			"disabled": false,
+			"autoApprove": [],
+			"type": "stdio"
+		},
     "fetch": {
       "args": [
         "mcp-server-fetch"

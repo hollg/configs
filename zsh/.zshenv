@@ -17,3 +17,4 @@ export LC_ALL=en_GB.UTF-8
 
 # Load environment variables (secrets) - available to all zsh sessions
 [[ -f "$HOME/configs/zsh/.env" ]] && source "$HOME/configs/zsh/.env"
+. "$HOME/.cargo/env"
