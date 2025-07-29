@@ -1,18 +1,28 @@
 {
   "mcpServers": {
-		"AWS API MCP Server": {
-			"command": "uvx",
-			"args": [
-				"awslabs.aws-api-mcp-server@latest"
-			],
-			"env": {
-				"AWS_REGION": "eu-central-1",
-				"AWS_API_MCP_WORKING_DIR": "/Users/gbgarhol"
-			},
-			"disabled": false,
-			"autoApprove": [],
-			"type": "stdio"
-		},
+    "AWS API MCP Server": {
+      "args": [
+        "awslabs.aws-api-mcp-server@latest"
+      ],
+      "autoApprove": [],
+      "command": "uvx",
+      "disabled": false,
+      "env": {
+        "AWS_API_MCP_WORKING_DIR": "/Users/gbgarhol",
+        "AWS_REGION": "eu-central-1"
+      },
+      "type": "stdio"
+    },
+    "context7": {
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "command": "npx",
+      "env": {
+        "DEFAULT_MINIMUM_TOKENS": "10"
+      }
+    },
     "fetch": {
       "args": [
         "mcp-server-fetch"

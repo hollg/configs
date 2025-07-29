@@ -42,6 +42,7 @@ if command -v zoxide >/dev/null 2>&1; then
 fi
 
 # Aliases
+## Git
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -61,6 +62,9 @@ alias gd='git diff'
 alias ga='git add'
 alias gc='git commit'
 alias gcm='git commit -m'
+
+## AI
+alias mcp='mcp-hub --port 8081 --config ~/.config/mcphub/servers.json'
 
 
 # Case-insensitive completion
