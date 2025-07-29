@@ -35,8 +35,13 @@ return { -- Autoformat
 			end
 		end,
 		formatters_by_ft = {
+			css = { "biome" },
+			html = { "biome" },
+			javascript = { "biome" },
 			json = { "fixjson" },
 			lua = { "stylua" },
+			rust = { "rustfmt" },
+			typescript = { "biome" },
 			yaml = { "yamlfix" },
 			-- Conform can also run multiple formatters sequentially
 			-- python = { "isort", "black" },
