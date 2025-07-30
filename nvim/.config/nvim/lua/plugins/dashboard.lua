@@ -1,4 +1,5 @@
 return {
+  event = "VimEnter",
 	"goolord/alpha-nvim",
 	opts = function()
 		-- header
