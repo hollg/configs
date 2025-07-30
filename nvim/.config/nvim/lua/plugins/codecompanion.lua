@@ -20,11 +20,27 @@ return {
 			},
 		},
 	},
+	keys = {
+		{
+			"<leader>xn",
+			"<cmd>CodeCompanionChat<cr>",
+			desc = "New CodeCompanion [c]hat",
+		},
+		{
+			"<leader>xt",
+			"<cmd>CodeCompanionChat<cr>",
+			desc = "[t]oggle CodeCompanion chat",
+		},
+		{
+			"<leader>xa",
+			"<cmd>CodeCompanionActions<cr>",
+			desc = "Activate CodeCompanion [a]ctions",
+		},
+	},
 	dependencies = {
 		{
 			"zbirenbaum/copilot.lua",
 			cmd = "Copilot",
-			event = "InsertEnter",
 			opts = {},
 		},
 		{
