@@ -18,6 +18,8 @@ vim.o.shiftwidth = 2
 
 -- Make line numbers default
 vim.o.number = true
+
+vim.o.relativenumber = true
 function ToggleLineNumber()
 	if vim.wo.relativenumber == true then
 		-- Currently in relative number mode, switch to absolute
