@@ -9,6 +9,7 @@ This is a portable and opinionated config for a terminal-based development envir
 - **iterm2** - Terminal emulator with Catppuccin themes and configuration management
 - **tmux** - Terminal multiplexer with plugins, theming, and session persistence
 - **zoxide** - Smarter `cd`
+- **go** - Go programming language toolchain (via Homebrew)
 - nvim _(planned)_
    - avante for ai integration
    - Avante and MCPHub for agentic AI functionality
@@ -23,6 +24,7 @@ This is a portable and opinionated config for a terminal-based development envir
 - [oh-my-zsh](https://ohmyz.sh/) - Framework for managing zsh configuration
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh theme with customizable prompt
 - [MesloLGS NF](https://github.com/romkatv/powerlevel10k#fonts) - Nerd Font optimized for Powerlevel10k
+- [Go](https://golang.org/) - Programming language and toolchain
 
 ## Quick Start
 
@@ -42,10 +44,10 @@ This is a portable and opinionated config for a terminal-based development envir
    ```bash
    stow zsh        # Apply zsh configuration
    stow iterm2     # Apply iTerm2 configuration
-   stow tmux       # Apply tmux configuration
-   # stow nvim     # Apply nvim configuration (when available)
-   ```
-
+stow tmux       # Apply tmux configuration
+stow go         # Apply Go configuration
+# stow nvim     # Apply nvim configuration (when available)
+```
 3. **Restart your terminal or reload your shell:**
    ```bash
    source ~/.zshrc
@@ -87,6 +89,9 @@ configs/
 ├── fonts/              # Font installation and configuration
 │   ├── install.sh     # Font-specific dependencies
 │   └── README.md      # Font setup instructions
+├── go/                 # Go toolchain installation and configuration
+│   ├── install.sh     # Go-specific dependencies
+│   └── README.md      # Go setup instructions
 ├── iterm2/             # iTerm2 configuration and themes
 │   ├── Library/       # Configuration files for Stow
 │   ├── colors/        # Catppuccin theme files
@@ -165,7 +170,7 @@ For complete removal of all modules:
 
 ```bash
 # Remove all active stow configurations
-for module in zsh iterm2 tmux fonts; do
+for module in zsh iterm2 tmux fonts go; do
     stow -D "$module" 2>/dev/null || true
 done
 ```
@@ -176,5 +181,6 @@ For detailed uninstallation instructions including dependency removal:
 - **iTerm2**: See `iterm2/README.md` for app removal and preference cleanup
 - **tmux**: See `tmux/README.md` for tmux and TPM plugin removal
 - **Fonts**: See `fonts/README.md` for font uninstallation and terminal reconfiguration
+- **Go**: See `go/README.md` for Go toolchain uninstallation
 
 **Warning**: Complete uninstallation will remove customizations and restore system defaults. Each module's README contains specific instructions for safely removing dependencies.

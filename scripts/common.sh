@@ -89,6 +89,11 @@ get_modules() {
             modules+=("${dir%/}")
         fi
     done
+    # Ensure 'go' is included as a module if present
+    if [[ -d "go" ]]; then
+        modules+=("go")
+    fi
+
     printf '%s\n' "${modules[@]}"
 }
 
