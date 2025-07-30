@@ -24,17 +24,17 @@ return {
 		{
 			"<leader>xn",
 			"<cmd>CodeCompanionChat<cr>",
-			desc = "New CodeCompanion [c]hat",
+			desc = "[n]ew CodeCompanion chat",
 		},
 		{
 			"<leader>xt",
-			"<cmd>CodeCompanionChat<cr>",
+			"<cmd>CodeCompanionChat Toggle<cr>",
 			desc = "[t]oggle CodeCompanion chat",
 		},
 		{
 			"<leader>xa",
 			"<cmd>CodeCompanionActions<cr>",
-			desc = "Activate CodeCompanion [a]ctions",
+			desc = "CodeCompanion [a]ctions",
 		},
 	},
 	dependencies = {
