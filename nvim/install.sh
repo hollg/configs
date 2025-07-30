@@ -16,8 +16,16 @@ check_homebrew() {
 # Install Neovim via Homebrew
 install_neovim() {
     if command_exists nvim; then
-        print_success "Neovim already installed"
-        print_status "Version: $(nvim --version | head -n1)"
+        local version=$(nvim --version | head -n1 | awk '{print $2}')
+        # Compare version to 0.11.0
+        if [[ $(echo -e "$version\n0.11.0" | sort -V | head -n1) == "0.11.0" && "$version" != "0.11.0" ]]; then
+            print_status "Neovim version $version is less than required 0.11. Upgrading via Homebrew..."
+            brew upgrade neovim
+            print_success "Neovim upgraded to $(nvim --version | head -n1)"
+        else
+            print_success "Neovim already installed and meets version requirement ($version)"
+            print_status "Version: $(nvim --version | head -n1)"
+        fi
     else
         print_status "Installing Neovim via Homebrew..."
         brew install neovim
