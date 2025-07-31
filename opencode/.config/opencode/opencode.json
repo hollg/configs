@@ -4,7 +4,6 @@
     "mode": {
         "build": {
             "model": "github-copilot-gpt-4.1",
-            "prompt": "./prompts/mcp.md",
             "temperature": 0.2,
             "tools": {
                 "write": true,
@@ -14,13 +13,22 @@
         },
         "plan": {
             "model": "github-copilot-gpt-4.1",
-            "prompt": "./prompts/mcp.md",
             "temperature": 0.2,
             "tools": {
                 "write": false,
                 "edit": false,
                 "bash": false
             }
+        },
+        "vibecode": {
+            "model": "github-copilot-gpt-4.1",
+            "temperature": 0.2,
+            "tools": {
+                "write": true,
+                "edit": true,
+                "bash": true
+            },
+            "instructions": "~/.config/opencode/instructions/vibecode.md"
         }
     },
     "keybinds": {
