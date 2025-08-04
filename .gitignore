@@ -19,3 +19,6 @@ Thumbs.db
 
 # Local configuration files
 *.local
+
+# tmux plugin installations
+tmux/.config/tmux/plugins
