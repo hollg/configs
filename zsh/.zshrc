@@ -33,6 +33,7 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # User configuration
+POWERLEVEL9K_DISABLE_AUTO_TITLE=true
 export EDITOR='nvim'
 export VISUAL='nvim'
 
