@@ -13,6 +13,13 @@
       },
       "type": "stdio"
     },
+    "wave MCP": {
+      "command": "npx",
+      "args": [
+        "wave-mcp"
+      ],
+      "type": "stdio"
+    },
     "context7": {
       "args": [
         "-y",

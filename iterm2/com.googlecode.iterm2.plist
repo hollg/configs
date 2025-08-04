@@ -4,8 +4,6 @@
 <dict>
 	<key>AllowClipboardAccess</key>
 	<true/>
-	<key>ClickToSelectCommand</key>
-	<false/>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>catppuccin-macchiato</key>
