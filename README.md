@@ -6,15 +6,14 @@ This is a portable and opinionated config for a terminal-based development envir
 
 - **zsh** - Shell configuration with oh-my-zsh, plugins, and useful aliases
 - **fonts** - Nerd Fonts installation for optimal terminal display
+- **ghostty** - GPU-accelerated terminal emulator configuration
 - **iterm2** - Terminal emulator with Catppuccin themes and configuration management
 - **tmux** - Terminal multiplexer with plugins, theming, and session persistence
+- **nvim** - Neovim configuration with LSP, plugins, and AI integration
+- **opencode** - AI coding assistant configuration
+- **npm** - Node.js package manager configuration
+- **go** - Go programming language toolchain
 - **zoxide** - Smarter `cd`
-- **go** - Go programming language toolchain (via Homebrew)
-- nvim _(planned)_
-   - avante for ai integration
-   - Avante and MCPHub for agentic AI functionality
-- git _(planned)_
-- npm _(planned)_
 
 ## Dependencies
 
@@ -42,12 +41,14 @@ This is a portable and opinionated config for a terminal-based development envir
 
 3. **Apply configurations for specific tools:**
    ```bash
-   stow zsh        # Apply zsh configuration
-   stow iterm2     # Apply iTerm2 configuration
-stow tmux       # Apply tmux configuration
-stow go         # Apply Go configuration
-# stow nvim     # Apply nvim configuration (when available)
-```
+    stow zsh        # Apply zsh configuration
+    stow iterm2     # Apply iTerm2 configuration
+    stow tmux       # Apply tmux configuration
+    stow go         # Apply Go configuration
+    stow nvim       # Apply nvim configuration
+    stow opencode   # Apply opencode configuration
+    stow npm        # Apply npm configuration
+    stow ghostty    # Apply ghostty configuration```
 3. **Restart your terminal or reload your shell:**
    ```bash
    source ~/.zshrc
@@ -83,34 +84,101 @@ Each tool has its own directory containing:
 
 ```
 configs/
-├── install.sh          # Installs all dependencies
-├── scripts/            # Shared utility functions
-│   └── common.sh      # Common functions for install scripts
-├── fonts/              # Font installation and configuration
-│   ├── install.sh     # Font-specific dependencies
-│   └── README.md      # Font setup instructions
-├── go/                 # Go toolchain installation and configuration
-│   ├── install.sh     # Go-specific dependencies
-│   └── README.md      # Go setup instructions
-├── iterm2/             # iTerm2 configuration and themes
-│   ├── Library/       # Configuration files for Stow
-│   ├── colors/        # Catppuccin theme files
-│   ├── install.sh     # iTerm2-specific dependencies
-│   ├── setup.sh       # Configuration workflow
-│   └── README.md      # iTerm2-specific documentation
-├── tmux/               # tmux configuration and plugins
-│   ├── .tmux.conf     # Main tmux configuration
-│   ├── install.sh     # tmux-specific dependencies
-│   ├── setup.sh       # Configuration workflow
-│   └── README.md      # tmux-specific documentation
-├── zsh/                # Zsh configuration
-│   ├── .zshrc         # Main zsh config
-│   ├── .zshenv        # Environment variables
-│   ├── .zprofile      # Login shell config
-│   ├── .p10k.zsh      # Powerlevel10k configuration
-│   ├── install.sh     # Zsh-specific dependencies
-│   └── README.md      # Zsh-specific documentation
-└── README.md          # This file
+├── .github/
+│   └── instructions/
+│       └── configs.md
+├── .mcphub/
+│   └── servers.json
+├── fonts/
+│   ├── install.sh
+│   └── README.md
+├── ghostty/
+│   ├── .config/
+│   │   └── ghostty/
+│   │       └── config
+│   └── install.sh
+├── go/
+│   ├── install.sh
+│   └── README.md
+├── iterm2/
+│   ├── colors/
+│   │   ├── catppuccin-frappe.itermcolors
+│   │   ├── catppuccin-latte.itermcolors
+│   │   ├── catppuccin-macchiato.itermcolors
+│   │   └── catppuccin-mocha.itermcolors
+│   ├── com.googlecode.iterm2.plist
+│   ├── install.sh
+│   └── README.md
+├── npm/
+│   ├── .npmrc
+│   └── README.md
+├── nvim/
+│   ├── .config/
+│   │   ├── mcphub/
+│   │   │   └── servers.json
+│   │   └── nvim/
+│   │       ├── lua/
+│   │       │   ├── plugins/
+│   │       │   │   ├── lsp/
+│   │       │   │   │   ├── blink.lua
+│   │       │   │   │   ├── conform.lua
+│   │       │   │   │   ├── init.lua
+│   │       │   │   │   └── lazydev.lua
+│   │       │   │   ├── autopairs.lua
+│   │       │   │   ├── codecompanion.lua
+│   │       │   │   ├── dashboard.lua
+│   │       │   │   ├── debug.lua
+│   │       │   │   ├── diagnostic.lua
+│   │       │   │   ├── finder.lua
+│   │       │   │   ├── gitsigns.lua
+│   │       │   │   ├── guess_indent.lua
+│   │       │   │   ├── health.lua
+│   │       │   │   ├── indent_line.lua
+│   │       │   │   ├── lint.lua
+│   │       │   │   ├── lualine.lua
+│   │       │   │   ├── mini.lua
+│   │       │   │   ├── neo-tree.lua
+│   │       │   │   ├── noice.lua
+│   │       │   │   ├── theme.lua
+│   │       │   │   ├── tmux_navigation.lua
+│   │       │   │   ├── todo_comments.lua
+│   │       │   │   ├── toggleterm.lua
+│   │       │   │   ├── treesitter.lua
+│   │       │   │   ├── vim-tpipeline.lua
+│   │       │   │   └── which_key.lua
+│   │       │   └── basics.lua
+│   │       ├── init.lua
+│   │       └── lazy-lock.json
+│   ├── install.sh
+│   └── README.md
+├── opencode/
+│   ├── .config/
+│   │   └── opencode/
+│   │       ├── instructions/
+│   │       │   └── vibecode.md
+│   │       └── opencode.json
+│   ├── install.sh
+│   └── README.md
+├── scripts/
+│   └── common.sh
+├── tmux/
+│   ├── .config/
+│   │   └── tmux/
+│   │       └── tmux.conf
+│   ├── install.sh
+│   └── README.md
+├── zsh/
+│   ├── .env.template
+│   ├── .p10k.zsh
+│   ├── .zprofile
+│   ├── .zshenv
+│   ├── .zshrc
+│   ├── install.sh
+│   └── README.md
+├── .gitignore
+├── .stowrc
+├── install.sh
+└── README.md
 ```
 
 ## Installation Options
@@ -160,6 +228,11 @@ stow -D zsh
 stow -D iterm2
 stow -D tmux
 stow -D fonts
+stow -D go
+stow -D nvim
+stow -D opencode
+stow -D npm
+stow -D ghostty
 
 # Verify no symlinks remain
 ls -la ~/ | grep " -> .*configs"
@@ -170,7 +243,7 @@ For complete removal of all modules:
 
 ```bash
 # Remove all active stow configurations
-for module in zsh iterm2 tmux fonts go; do
+for module in zsh iterm2 tmux fonts go nvim opencode npm ghostty; do
     stow -D "$module" 2>/dev/null || true
 done
 ```
@@ -182,5 +255,9 @@ For detailed uninstallation instructions including dependency removal:
 - **tmux**: See `tmux/README.md` for tmux and TPM plugin removal
 - **Fonts**: See `fonts/README.md` for font uninstallation and terminal reconfiguration
 - **Go**: See `go/README.md` for Go toolchain uninstallation
+- **Nvim**: See `nvim/README.md` for Neovim and plugin removal
+- **Opencode**: See `opencode/README.md` for opencode configuration removal
+- **Npm**: See `npm/README.md` for npm configuration removal
+- **Ghostty**: See `ghostty/README.md` for ghostty configuration removal
 
 **Warning**: Complete uninstallation will remove customizations and restore system defaults. Each module's README contains specific instructions for safely removing dependencies.
