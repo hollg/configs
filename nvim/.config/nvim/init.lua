@@ -45,6 +45,7 @@ require("lazy").setup({
 	require("plugins.which_key"),
 	require("plugins.noice"),
 	require("plugins.vim-tpipeline"),
+	require("plugins.toggleterm"),
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
