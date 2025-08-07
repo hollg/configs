@@ -216,8 +216,8 @@ return {
 					},
 				},
 				pyright = {},
-				-- rust_analyzer = {},
 				ts_ls = {},
+				-- rust_analyzer is not in this list because it's managed by rustaceanvim
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -240,6 +240,7 @@ return {
 				"rustfmt", -- Used to format rust
 				"stylua", -- Used to format Lua code
 				"yamlfix", -- Used to format yaml
+				"codelldb",
 			})
 			require("mason-tool-installer").setup({
 				ensure_installed = ensure_installed,
