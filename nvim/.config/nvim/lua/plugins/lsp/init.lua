@@ -216,7 +216,7 @@ return {
 					},
 				},
 				pyright = {},
-				rust_analyzer = {},
+				-- rust_analyzer = {},
 				ts_ls = {},
 			}
 

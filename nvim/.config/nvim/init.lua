@@ -47,6 +47,8 @@ require("lazy").setup({
 	require("plugins.vim-tpipeline"),
 	require("plugins.toggleterm"),
 	require("plugins.staycentered"),
+	require("plugins.neotest"),
+	require("plugins.rustaceanvim"),
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
