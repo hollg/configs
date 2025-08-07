@@ -5,6 +5,7 @@ This directory manages font installation for the terminal-based development envi
 ## Font Included
 
 - **MesloLGS NF** - Nerd Font specifically recommended by Powerlevel10k for optimal icon display
+- **JetBrains Mono** - Nerd Font designed for legibility
 
 ## Installation
 
@@ -44,50 +45,9 @@ Add to your VS Code settings.json:
 }
 ```
 
-### Alacritty
-Add to your alacritty.yml:
+### Ghostty
+Add to your Ghostty config:
 ```yaml
-font:
-  normal:
-    family: MesloLGS NF
-  size: 13.0
+font-family: JetBrains Mono
 ```
 
-## Why This Font?
-
-- **Nerd Font**: Includes additional glyphs for icons, symbols, and powerline segments
-- **Powerlevel10k Optimized**: Specifically designed to work perfectly with Powerlevel10k
-- **Programming Focus**: Optimized for code readability
-- **Consistent Experience**: Same font across all development tools
-
-## Troubleshooting
-
-If icons don't display correctly in your terminal:
-
-1. Verify the font is installed: `brew list --cask font-meslo-lg-nerd-font`
-2. Restart your terminal application completely
-3. Check that your terminal is using "MesloLGS NF" (not "Meslo" or similar)
-4. Ensure font size is not too small (12pt minimum recommended)
-
-## Uninstallation
-
-To remove the installed fonts:
-
-1. **Uninstall via Homebrew**:
-   ```bash
-   brew uninstall --cask font-meslo-lg-nerd-font
-   ```
-
-2. **Reset terminal font settings**:
-   - **iTerm2**: Go to Preferences → Profiles → Text → Change font back to default
-   - **macOS Terminal**: Go to Preferences → Text → Change font back to default
-   - **VS Code**: Remove or change the `terminal.integrated.fontFamily` setting
-   - **Alacritty**: Remove or change the font family in alacritty.yml
-
-3. **Verify removal**:
-   ```bash
-   # Check if font is still installed
-   brew list --cask | grep font-meslo
-   ```
-
-**Note**: After uninstalling, terminal icons and symbols may not display correctly if you're using Powerlevel10k or other tools that rely on Nerd Fonts.

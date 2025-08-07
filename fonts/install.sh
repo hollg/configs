@@ -21,6 +21,17 @@ install_nerd_fonts() {
     fi
 }
 
+install_jetbrains_mono() {
+    # Check if font-jetbrains-mono is already installed
+    if brew list --cask font-jetbrains-mono &>/dev/null; then
+        print_success "JetBrains Mono already installed"
+    else
+        print_status "Installing JetBrains Mono font..."
+        brew install --cask font-jetbrains-mono
+        print_success "JetBrains Mono installed"
+    fi
+}
+
 # Main installation function for fonts module
 main() {
     # Ensure Homebrew is available
@@ -30,15 +41,16 @@ main() {
     fi
     
     install_nerd_fonts
-    
+    install_jetbrains_mono
+
     print_success "Font module dependencies installed successfully!"
     echo
     echo "📝 Next steps:"
     echo "  1. Restart your terminal application"
-    echo "  2. Configure your terminal to use 'MesloLGS NF' font"
-    echo "  3. For iTerm2: Preferences → Profiles → Text → Font → MesloLGS NF"
-    echo "  4. For Terminal.app: Terminal → Preferences → Profiles → Text → Font → MesloLGS NF"
-    echo "  5. For VS Code terminal: Set 'terminal.integrated.fontFamily': 'MesloLGS NF'"
+    echo "  2. Configure your terminal to use 'MesloLGS NF' or 'JetBrains Mono' font"
+    echo "  3. For iTerm2: Preferences → Profiles → Text → Font → MesloLGS NF or JetBrains Mono"
+    echo "  4. For Terminal.app: Terminal → Preferences → Profiles → Text → Font → MesloLGS NF or JetBrains Mono"
+    echo "  5. For VS Code terminal: Set 'terminal.integrated.fontFamily': 'MesloLGS NF' or 'JetBrains Mono'"
 }
 
 # Run main function if script is executed directly
