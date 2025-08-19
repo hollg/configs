@@ -6,6 +6,7 @@ return {
 			adapters = {
 				require("neotest-vitest"),
 				require("rustaceanvim.neotest"),
+				require("neotest-golang"),
 			},
 		})
 
@@ -71,5 +72,6 @@ return {
 		"antoinemadec/FixCursorHold.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		"marilari88/neotest-vitest",
+		{ "fredrikaverpil/neotest-golang", version = "*" }, -- Installation
 	},
 }

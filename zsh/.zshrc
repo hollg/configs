@@ -74,3 +74,4 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # Load any local configuration
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
