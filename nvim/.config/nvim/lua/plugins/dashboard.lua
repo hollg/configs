@@ -17,11 +17,11 @@ return {
 
 		-- menu options
 		dashboard.section.buttons.val = {
-			dashboard.button("e", "  New file", "<cmd>ene <CR>"),
-			dashboard.button("SPC s f", "󰱼  [s]earch for a [f]ile"),
-			dashboard.button("SPC s g", "󰱼  [s]earch by [g]rep"),
-			dashboard.button("SPC m p", "󰐱  [m]anage [p]lugins", "<cmd>Lazy<CR>"),
-			dashboard.button("q", "󰗼  Quit", ":qa<CR>"),
+			dashboard.button("e", "  New file", "<cmd>ene<CR>"),
+			dashboard.button("f", "󰱼  [f]ind files", "<cmd>Telescope find_files<CR>"),
+			dashboard.button("g", "󰱼  search by [g]rep", "<cmd>Telescope live_grep<CR>"),
+			dashboard.button("p", "󰐱  manage [p]lugins", "<cmd>Lazy<CR>"),
+			dashboard.button("q", "󰗼  [q]uit", "<cmd>qa<CR>"),
 		}
 
 		-- footer
