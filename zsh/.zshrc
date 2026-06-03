@@ -67,6 +67,12 @@ alias gcm='git commit -m'
 ## AI
 alias mcp='mcp-hub --port 8081 --config ~/.config/mcphub/servers.json'
 
+export ANTHROPIC_DEFAULT_OPUS_MODEL="anthropic.claude-opus-4-7"
+export ANTHROPIC_DEFAULT_SONNET_MODEL="anthropic.claude-sonnet-4-6"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="anthropic.claude-haiku-4-5-20251001-v1:0"
+export ANTHROPIC_BASE_URL="https://models.assistant.legogroup.io/claude"
+export ANTHROPIC_AUTH_TOKEN="$MPS_API_KEY"
+
 
 # Case-insensitive completion
 autoload -Uz compinit && compinit
