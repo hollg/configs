@@ -23,12 +23,13 @@ install_tmux() {
 
 # Install TPM (Tmux Plugin Manager)
 install_tpm() {
-    local tpm_dir="$HOME/.tmux/plugins/tpm"
-    
+    local tpm_dir="$HOME/.config/tmux/plugins/tpm"
+
     if [[ -d "$tpm_dir" ]]; then
         print_success "TPM (Tmux Plugin Manager) already installed"
     else
         print_status "Installing TPM (Tmux Plugin Manager)..."
+        mkdir -p "$(dirname "$tpm_dir")"
         git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
         print_success "TPM installed"
     fi
@@ -44,7 +45,7 @@ verify_installation() {
         exit 1
     fi
     
-    if [[ -d "$HOME/.tmux/plugins/tpm" ]]; then
+    if [[ -d "$HOME/.config/tmux/plugins/tpm" ]]; then
         print_success "TPM installation verified"
     else
         print_error "TPM installation failed"
@@ -69,8 +70,8 @@ main() {
     echo "  3. Configure tmux settings - changes auto-save to this repo!"
     echo "  4. Commit your configuration changes to git"
     echo
-    print_status "Key bindings (with default config):"
-    echo "  - prefix key: Ctrl-b (customizable)"
+    print_status "Key bindings (with this config):"
+    echo "  - prefix key: Ctrl-a"
     echo "  - Install plugins: prefix + I"
     echo "  - Update plugins: prefix + U"
     echo "  - Uninstall plugins: prefix + alt + u"

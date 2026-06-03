@@ -6,10 +6,9 @@ This module installs and manages tmux (terminal multiplexer) with a comprehensiv
 
 - tmux terminal multiplexer installed via Homebrew
 - TPM (Tmux Plugin Manager) for plugin management
-- Comprehensive `.tmux.conf` with sensible defaults
-- Catppuccin theme integration
-- Session persistence with tmux-resurrect and tmux-continuum
-- Enhanced copy/paste functionality
+- `tmux.conf` with ergonomic key bindings and a manual Catppuccin Macchiato palette
+- Enhanced copy/paste functionality (tmux-yank)
+- Seamless pane navigation with Neovim (vim-tmux-navigator)
 
 ## Installation
 
@@ -58,31 +57,24 @@ Or install as part of the full configs project:
 - **Switch windows**: `Alt + 1-5` (no prefix needed)
 - **Reload config**: `prefix + r`
 
-### Session Management
-- **Auto-save**: Sessions saved every 15 minutes
-- **Auto-restore**: Sessions restored on tmux start
-- **Persistence**: Sessions survive system restarts
-
 ### Visual Enhancements
-- **256 colors**: Full color support
-- **Catppuccin theme**: Beautiful, consistent theming
+- **True (24-bit) color**: enabled inside tmux via `RGB` terminal-overrides
+- **Catppuccin Macchiato**: applied as a manual palette in `tmux.conf` (no plugin)
 - **Mouse support**: Click to switch panes and windows
 - **Activity monitoring**: Visual alerts for window activity
 
 ## Plugins
 
-The configuration includes these essential plugins:
+The configuration includes these plugins:
 
-### Core Functionality
-- **tmux-sensible**: Sensible default settings
-- **tmux-yank**: Enhanced copy/paste with system clipboard integration
+- **tpm**: the plugin manager itself
+- **tmux-sensible**: a small, opinionated set of defaults
+- **tmux-yank**: copy to the system clipboard from tmux copy-mode
+- **vim-tmux-navigator**: `Ctrl + h/j/k/l` jumps across both nvim splits and tmux panes
 
-### Session Persistence
-- **tmux-resurrect**: Save and restore tmux sessions
-- **tmux-continuum**: Automatic session saving and restoring
-
-### Theming
-- **catppuccin/tmux**: Beautiful Catppuccin color scheme
+> Theming is done with a manual Catppuccin Macchiato palette in `tmux.conf`.
+> Session persistence (tmux-resurrect / tmux-continuum) is **not** configured —
+> add them to the `@plugin` list in `tmux.conf` if you want them.
 
 ## Plugin Management
 
@@ -138,13 +130,9 @@ Alt + 1-5              # Switch to window 1-5
 ## Customization
 
 ### Theme Variants
-Change the Catppuccin flavor in `.tmux.conf`:
-```bash
-set -g @catppuccin_flavour 'mocha'    # Dark (default)
-set -g @catppuccin_flavour 'latte'    # Light
-set -g @catppuccin_flavour 'frappe'   # Dark variant
-set -g @catppuccin_flavour 'macchiato' # Dark variant
-```
+Catppuccin is applied as a manual palette in `tmux.conf` (see the `Visual
+Settings` section). To switch flavours, replace the hex values with one of the
+upstream palettes from <https://github.com/catppuccin/catppuccin>.
 
 ### Prefix Key
 To change the prefix key, modify these lines in `.tmux.conf`:
@@ -172,15 +160,9 @@ set -g mouse off        # Change 'on' to 'off'
 2. Reload tmux config: `prefix + r`
 3. Try installing again: `prefix + I`
 
-### Sessions not restoring
-1. Check if tmux-continuum is working: `tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH`
-2. Manually save session: `prefix + Ctrl-s`
-3. Manually restore session: `prefix + Ctrl-r`
-
 ## Scripts
 
 - `install.sh` - Install tmux and TPM
-- `setup.sh` - Show configuration workflow and status
 
 ## Integration
 
