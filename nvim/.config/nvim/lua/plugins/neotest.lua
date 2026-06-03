@@ -3,11 +3,17 @@ return {
 	event = "BufEnter",
 	config = function()
 		require("neotest").setup({
-			adapters = {
+		adapters = (function()
+			local adapters = {
 				require("neotest-vitest"),
-				require("rustaceanvim.neotest"),
 				require("neotest-golang"),
-			},
+			}
+			local ok, rust_adapter = pcall(require, "rustaceanvim.neotest")
+			if ok then
+				table.insert(adapters, rust_adapter)
+			end
+			return adapters
+		end)(),
 		})
 
 		vim.keymap.set(

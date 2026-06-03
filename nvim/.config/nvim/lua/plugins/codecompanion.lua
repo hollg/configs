@@ -3,7 +3,22 @@ return {
 	opts = {
 		strategies = {
 			chat = { adapter = "copilot" },
+			inline = { adapter = "copilot" },
 			agent = { adapter = "copilot" },
+		},
+		interactions = {
+			chat = {
+				opts = {
+					completion_provider = "blink",
+				},
+			},
+		},
+		prompt_library = {
+			markdown = {
+				dirs = {
+					vim.fn.stdpath("config") .. "/prompts",
+				},
+			},
 		},
 		extensions = {
 			mcphub = {
@@ -44,7 +59,8 @@ return {
 			opts = {},
 		},
 		{
-			"ravitemer/mcphub.nvim",
+			"bahaaza/mcphub.nvim",
+			commit = "9a39887cb853fa7f902e3bdd2cb4911bc3219f96",
 			dependencies = { "nvim-lua/plenary.nvim" },
 			build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
 			config = function()
