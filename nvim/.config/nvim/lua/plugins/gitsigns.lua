@@ -79,7 +79,7 @@ return {{
             map('n', '<leader>hS', gitsigns.stage_buffer, {
                 desc = 'git [S]tage buffer'
             })
-            map('n', '<leader>hu', gitsigns.stage_hunk, {
+            map('n', '<leader>hu', gitsigns.undo_stage_hunk, {
                 desc = 'git [u]ndo stage hunk'
             })
             map('n', '<leader>hR', gitsigns.reset_buffer, {
