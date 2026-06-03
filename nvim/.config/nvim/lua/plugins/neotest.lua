@@ -3,17 +3,11 @@ return {
 	event = "BufEnter",
 	config = function()
 		require("neotest").setup({
-		adapters = (function()
-			local adapters = {
+			adapters = {
 				require("neotest-vitest"),
 				require("neotest-golang"),
-			}
-			local ok, rust_adapter = pcall(require, "rustaceanvim.neotest")
-			if ok then
-				table.insert(adapters, rust_adapter)
-			end
-			return adapters
-		end)(),
+				require("rustaceanvim.neotest"),
+			},
 		})
 
 		vim.keymap.set(
@@ -79,5 +73,6 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		"marilari88/neotest-vitest",
 		{ "fredrikaverpil/neotest-golang", version = "*" }, -- Installation
+		"mrcjkb/rustaceanvim",
 	},
 }
