@@ -20,29 +20,11 @@ vim.o.shiftwidth = 2
 vim.o.number = true
 
 vim.o.relativenumber = true
-function ToggleLineNumber()
-	if vim.wo.relativenumber == true then
-		-- Currently in relative number mode, switch to absolute
-		vim.wo.number = true
-		vim.wo.relativenumber = false
-	else
-		-- Currently in absolute number mode, switch to relative
-		vim.wo.number = true
-		vim.wo.relativenumber = true
-	end
-end
 
--- toggle line number type
-vim.keymap.set(
-	"n",
-	"<leader>tn",
-	":lua ToggleLineNumber()<CR>",
-	{ noremap = true, silent = true, desc = "[T]oggle absolute/relative line [n]umbers" }
-)
-
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.keymap.set("n", "<leader>tn", function()
+	vim.wo.number = true
+	vim.wo.relativenumber = not vim.wo.relativenumber
+end, { desc = "[T]oggle absolute/relative line [n]umbers" })
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = "a"
@@ -122,12 +104,6 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, {
 	desc = "Open diagnostic [Q]uickfix list",
 })
 
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
 -- Window/pane navigation with <C-h/j/k/l> is owned by nvim-tmux-navigation
 -- (see lua/plugins/tmux_navigation.lua) so the same keys work across nvim
 -- splits and tmux panes.
@@ -139,24 +115,13 @@ vim.keymap.set("i", "jk", "<ESC>", {
 -- use esc to exit terminal mode
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", { noremap = true })
 
--- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
--- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
--- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
--- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
--- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
-
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
 -- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.hl.on_yank()`
--- vim.api.nvim_create_autocmd("TextYankPost", {
--- 	desc = "Highlight when yanking (copying) text",
--- 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", {
--- 		clear = true,
--- 	}),
--- 	callback = function()
--- 		vim.hl.on_yank()
--- 	end,
--- })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", {
+		clear = true,
+	}),
+	callback = function()
+		vim.hl.on_yank()
+	end,
+})

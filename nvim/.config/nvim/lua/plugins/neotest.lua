@@ -1,6 +1,70 @@
 return {
 	"nvim-neotest/neotest",
-	event = "BufEnter",
+	keys = {
+		{
+			"<leader>nr",
+			function()
+				require("neotest").run.run()
+			end,
+			desc = "[r]un the nearest test",
+		},
+		{
+			"<leader>nf",
+			function()
+				require("neotest").run.run(vim.fn.expand("%"))
+			end,
+			desc = "run tests in [f]ile",
+		},
+		{
+			"<leader>na",
+			function()
+				require("neotest").run.run({ suite = true })
+			end,
+			desc = "run [a]ll tests",
+		},
+		{
+			"<leader>ns",
+			function()
+				require("neotest").run.stop()
+			end,
+			desc = "[s]top test",
+		},
+		{
+			"<leader>nd",
+			function()
+				require("neotest").run.run({ strategy = "dap" })
+			end,
+			desc = "[d]ebug nearest test",
+		},
+		{
+			"<leader>nn",
+			function()
+				require("neotest").run.attach()
+			end,
+			desc = "[a]ttach to nearest test",
+		},
+		{
+			"<leader>no",
+			function()
+				require("neotest").output.open()
+			end,
+			desc = "show test [o]utput",
+		},
+		{
+			"<leader>np",
+			function()
+				require("neotest").output_panel.toggle()
+			end,
+			desc = "toggle output [p]anel",
+		},
+		{
+			"<leader>nv",
+			function()
+				require("neotest").summary.toggle()
+			end,
+			desc = "toggle summary",
+		},
+	},
 	config = function()
 		require("neotest").setup({
 			adapters = {
@@ -9,62 +73,6 @@ return {
 				require("rustaceanvim.neotest"),
 			},
 		})
-
-		vim.keymap.set(
-			"n",
-			"<leader>nr",
-			'<cmd>lua require("neotest").run.run()<cr>',
-			{ desc = "[r]un the nearest test" }
-		)
-
-		vim.keymap.set(
-			"n",
-			"<leader>nf",
-			'<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<cr>',
-			{ desc = "run tests in [f]ile" }
-		)
-
-		vim.keymap.set(
-			"n",
-			"<leader>na",
-			'<cmd>lua require("neotest").run.run({suite = true})<cr>',
-			{ desc = "run [a]ll tests" }
-		)
-
-		vim.keymap.set("n", "<leader>ns", '<cmd>lua require("neotest").run.stop()<cr>', { desc = "[s]top test" })
-		vim.keymap.set(
-			"n",
-			"<leader>nd",
-			'<cmd>lua require("neotest").run.run({strategy = "dap"})<cr>',
-			{ desc = "[d]ebug nearest test" }
-		)
-		vim.keymap.set(
-			"n",
-			"<leader>nn",
-			'<cmd>lua require("neotest").run.attach()<cr>',
-			{ desc = "[a]ttach to nearest test" }
-		)
-
-		vim.keymap.set(
-			"n",
-			"<leader>no",
-			'<cmd>lua require("neotest").output.open()<cr>',
-			{ desc = "show test [o]utput" }
-		)
-
-		vim.keymap.set(
-			"n",
-			"<leader>np",
-			'<cmd>lua require("neotest").output_panel.toggle()<cr>',
-			{ desc = "toggle output [p]anel" }
-		)
-
-		vim.keymap.set(
-			"n",
-			"<leader>nv",
-			'<cmd>lua require("neotest").summary.toggle()<cr>',
-			{ desc = "toggle summary" }
-		)
 	end,
 	dependencies = {
 		"nvim-neotest/nvim-nio",
@@ -72,7 +80,7 @@ return {
 		"antoinemadec/FixCursorHold.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		"marilari88/neotest-vitest",
-		{ "fredrikaverpil/neotest-golang", version = "*" }, -- Installation
+		{ "fredrikaverpil/neotest-golang", version = "*" },
 		"mrcjkb/rustaceanvim",
 	},
 }

@@ -4,7 +4,7 @@ return {
 		"neovim/nvim-lspconfig",
 		"mason-org/mason.nvim",
 	},
-	version = "^4", -- Recommended
+	version = "^9",
 	config = function()
 		local cfg = {
 			server = {

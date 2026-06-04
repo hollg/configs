@@ -1,8 +1,15 @@
 return {
 	"arnamak/stay-centered.nvim",
-	lazy = false,
+	keys = {
+		{
+			"<leader>tc",
+			function()
+				require("stay-centered").toggle()
+			end,
+			desc = "[t]oggle auto-[c]entering",
+		},
+	},
 	config = function()
 		require("stay-centered").setup({})
-		vim.keymap.set("n", "<leader>tc", require("stay-centered").toggle, { desc = "[t]oggle auto-[c]entering" })
 	end,
 }

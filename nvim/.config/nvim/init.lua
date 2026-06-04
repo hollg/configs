@@ -24,31 +24,8 @@ rtp:prepend(lazypath)
 --  To update plugins you can run
 --    :Lazy update
 require("lazy").setup({
-	require("plugins.autopairs"),
-	require("plugins.codecompanion"),
-	require("plugins.dashboard"),
-	require("plugins.debug"),
-	require("plugins.diagnostic"),
-	require("plugins.finder"),
-	require("plugins.gitsigns"),
-	require("plugins.guess_indent"),
-	require("plugins.indent_line"),
-	require("plugins.lint"),
-	require("plugins.lsp"),
-	require("plugins.lualine"),
-	require("plugins.mini"),
-	require("plugins.neo-tree"),
-	require("plugins.theme"),
-	require("plugins.tmux_navigation"),
-	require("plugins.todo_comments"),
-	require("plugins.treesitter"),
-	require("plugins.which_key"),
-	require("plugins.noice"),
-	require("plugins.vim-tpipeline"),
-	require("plugins.toggleterm"),
-	require("plugins.staycentered"),
-	require("plugins.neotest"),
-	require("plugins.rustaceanvim"),
+	{ import = "plugins" },
+	{ import = "plugins.lsp" },
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
