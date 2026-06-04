@@ -2,16 +2,14 @@ return {
 	"olimorris/codecompanion.nvim",
 	opts = {
 		strategies = {
-			chat = { adapter = "copilot" },
-			inline = { adapter = "copilot" },
-			agent = { adapter = "copilot" },
-		},
-		interactions = {
 			chat = {
+				adapter = "copilot",
 				opts = {
 					completion_provider = "blink",
 				},
 			},
+			inline = { adapter = "copilot" },
+			agent = { adapter = "copilot" },
 		},
 		prompt_library = {
 			markdown = {
@@ -59,10 +57,18 @@ return {
 			opts = {},
 		},
 		{
+			-- Fork pinned for codecompanion v19 compatibility — upstream
+			-- ravitemer/mcphub.nvim only supports up to v18 as of 2026-06.
+			-- f94e1c8 fixes editor_context location after codecompanion's
+			-- migration to interactions.shared.editor_context.
+			-- Requires the `mcp-hub` node binary to be installed globally:
+			--   npm install -g mcp-hub@latest
+			-- Not wired as a `build` hook because lazy runs in a non-interactive
+			-- shell that doesn't source nvm. `:checkhealth kickstart` warns if
+			-- the binary is missing.
 			"bahaaza/mcphub.nvim",
-			commit = "9a39887cb853fa7f902e3bdd2cb4911bc3219f96",
+			commit = "f94e1c8e1aea68c3f8f6df5cf51c752033584fd0",
 			dependencies = { "nvim-lua/plenary.nvim" },
-			build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
 			config = function()
 				require("mcphub").setup({
 					workspace = {

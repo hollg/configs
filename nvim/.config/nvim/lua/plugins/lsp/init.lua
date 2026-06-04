@@ -170,6 +170,7 @@ return {
 
 		require("mason-lspconfig").setup({
 			ensure_installed = vim.tbl_keys(servers),
+			automatic_enable = vim.tbl_keys(servers),
 		})
 	end,
 }
