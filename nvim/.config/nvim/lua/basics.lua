@@ -63,6 +63,9 @@ vim.o.timeoutlen = 300
 vim.o.splitright = true
 vim.o.splitbelow = true
 
+-- Rounded borders on every floating window (LSP hover/signature, telescope, etc)
+vim.o.winborder = "rounded"
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
