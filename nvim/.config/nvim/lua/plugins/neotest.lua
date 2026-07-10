@@ -78,7 +78,7 @@ return {
 		"nvim-neotest/nvim-nio",
 		"nvim-lua/plenary.nvim",
 		"antoinemadec/FixCursorHold.nvim",
-		"nvim-treesitter/nvim-treesitter",
+		-- nvim-treesitter removed: Neovim 0.12+ has native treesitter support
 		"marilari88/neotest-vitest",
 		{ "fredrikaverpil/neotest-golang", version = "*" },
 		"mrcjkb/rustaceanvim",

@@ -94,7 +94,8 @@ return {
 			ft = { "markdown", "codecompanion" },
 			dependencies = {
 				"nvim-lua/plenary.nvim",
-				"nvim-treesitter/nvim-treesitter",
+				-- nvim-treesitter removed: Neovim 0.12+ has native treesitter support
+				-- and the archived plugin causes "attempt to call method 'range'" errors
 			},
 		},
 		{
