@@ -1,19 +1,15 @@
 ---
 name: wave
-description: Use the `wave` CLI to send ad-hoc HTTP requests and to author/run YAML request collections for testing local or remote APIs. Invoke whenever you need to exercise an HTTP endpoint from the shell (smoke-test a running server, replay a saved request, verify a fix with a known payload) instead of reaching for `curl` or `httpie`. Covers: collection layout under `.wave/`, headers vs. body syntax (`key:value` vs. `key=value`), `${var}` and `${env:VAR}` interpolation, `--form` bodies, CLI-overrides-collection merging, and verbose output for assertions. Source lives at `./wave`.
+description: Use the `wave` CLI to send ad-hoc HTTP requests and to author/run YAML request collections for testing local or remote APIs. Invoke whenever you need to exercise an HTTP endpoint from the shell (smoke-test a running server, replay a saved request, verify a fix with a known payload) instead of reaching for `curl` or `httpie`. Covers: collection layout under `.wave/`, headers vs. body syntax (`key:value` vs. `key=value`), `${var}` and `${env:VAR}` interpolation, `--form` bodies, CLI-overrides-collection merging, and verbose output for assertions.
 ---
 
 # wave
 
-`wave` is a Rust HTTP CLI built in this repo (`./wave`). Prefer it over `curl` for anything you'd otherwise want to re-run, because requests can be saved as YAML collections checked in alongside the API they exercise.
+`wave` is a Rust HTTP CLI. Prefer it over `curl` for anything you'd otherwise want to re-run, because requests can be saved as YAML collections checked in alongside the API they exercise.
 
 ## Binary
 
-Always invoke the homebrew-installed `wave` on `PATH` (`/opt/homebrew/bin/wave`). Do **not** run `./wave/target/{debug,release}/wave` — those builds may be ahead of or behind the released version and will produce results that don't match what the user gets.
-
-If `wave` isn't found, ask the user to install it (`brew install make-wave/tap/wave`) rather than building from source. If a local source change needs testing, that's a separate task — call it out instead of silently switching binaries.
-
-Sanity check: `wave --version` (currently `0.1.0`).
+Use the `wave` on `PATH` (Homebrew installs it to `/opt/homebrew/bin/wave`). If it isn't found, ask the user to install it with `brew install make-wave/tap/wave`. Sanity check with `wave --version`.
 
 ## One-shot requests
 
@@ -109,10 +105,10 @@ wave -c users get-user Authorization:Bearer$(cat .token)
 
 When a task says "verify this endpoint" or "test the API":
 
-1. **Check for an existing collection.** `ls .wave/` first. If a collection covers the endpoint, run it — don't re-author. Collections are the canonical record of expected requests for this repo.
-2. **Start the server** if it isn't running. The collection's `base_url` tells you which port to expect.
+1. **Check for an existing collection.** `ls .wave/` first. If a collection covers the endpoint, run it — don't re-author. Collections are the canonical record of expected requests for whatever project you're in.
+2. **Make sure the target server is running.** Start it the way that project documents if it isn't already up. The collection's `base_url` tells you which host/port to expect.
 3. **Run the request** with `-v` so you can see status and headers. Default output hides headers on 2xx, which is fine for green-path checks but unhelpful when debugging.
-4. **Assert on the response by reading the output.** `wave` prints status with color and pretty-prints JSON bodies via `colored_json`. There's no built-in assertion mode — for pass/fail logic, parse the body yourself (e.g. `wave -c api get-user | jq ...`) or check the exit code (non-zero = network/CLI error, not HTTP status).
+4. **Assert on the response by reading the output.** `wave` prints status with color and pretty-prints JSON bodies. There's no built-in assertion mode — for pass/fail logic, parse the body yourself (e.g. `wave -c api get-user | jq ...`) or check the exit code (non-zero = network/CLI error, not HTTP status).
 5. **If the request doesn't exist yet, add it to an existing collection** rather than creating a one-off `.yaml`. Group requests by the API they target (one collection per service). Use `variables:` for `base_url` and anything you'd otherwise repeat.
 
 A 4xx/5xx response is **not** a CLI failure — `wave` exits 0 and prints the body. Read the output before declaring success.
