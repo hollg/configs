@@ -8,6 +8,7 @@ project, regardless of which directory you're working in.
 ```
 claude/
 └── .claude/
+    ├── CLAUDE.md          → ~/.claude/CLAUDE.md    (global Claude memory)
     ├── skills/            → ~/.claude/skills/     (each subdir is one skill)
     │   └── example-skill/
     │       └── SKILL.md
@@ -17,6 +18,21 @@ claude/
 
 Following the repo convention, the in-module tree mirrors `$HOME`: everything under
 `claude/.claude/` is symlinked beneath `~/.claude/`.
+
+## Global memory & AGENTS.md
+
+`CLAUDE.md` is Claude Code's global memory file (loaded in every project). Because
+Claude Code does **not** read `AGENTS.md`, this file imports the shared, machine-wide
+instructions with a single line:
+
+```
+@~/AGENTS.md
+```
+
+`~/AGENTS.md` is owned by the separate [`agents`](../agents/README.md) module and is what
+every *other* agent reads directly. Keeping the instructions there gives all agents one
+source of truth; add Claude-only guidance beneath the import in `CLAUDE.md`. Apply both
+modules together: `stow claude agents`.
 
 ## Install & apply
 

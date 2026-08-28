@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A portable, opinionated dotfiles repository for a terminal-based development environment. Each tool's configuration lives in its own top-level directory (a "module"), and [GNU Stow](https://www.gnu.org/software/stow/) manages the symlinks from each module into the correct filesystem location. Nothing here is a compiled project — there is no build or test suite; "running" a module means symlinking its config and launching the underlying tool.
 
-Modules: `zsh`, `fonts`, `ghostty`, `iterm2`, `tmux`, `nvim`, `opencode`, `npm`, `go`, `claude`.
+Modules: `zsh`, `fonts`, `ghostty`, `iterm2`, `tmux`, `nvim`, `opencode`, `npm`, `go`, `claude`, `agents`.
 
 ## Commands
 

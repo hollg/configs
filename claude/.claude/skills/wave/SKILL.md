@@ -94,6 +94,8 @@ Trailing `key:value` / `key=value` params on `wave -c ...` are merged into the s
 - Headers with the same name are replaced; new headers are appended.
 - Body fields with the same key are replaced (with the CLI's type inference applied); new fields are appended.
 
+`--var key=value` is used to overwrite a `variable` defined in the collection for the current request
+
 Use this to vary one input across runs without editing YAML:
 
 ```
