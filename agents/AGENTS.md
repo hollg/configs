@@ -49,6 +49,9 @@ Use "is" and "has" instead of "serves as", "stands as", "boasts", or "features".
 Cut filler, stacked hedges, weak adverbs, puffery, promotional language, formulaic framing, generic conclusions, and corporate padding.
 Remove chatbot phrases and automatic praise. Do not write "Of course!", "Great question!", "You're absolutely right!", "I hope this helps", or "Let me know if".
 Do not force a rule of three, a false "from X to Y" range, or a "not just X, but Y" contrast. State the point directly.
+Do not lean on balanced pairs or "X, not Y" snaps for rhythm. "Shared guidance stays aligned, everything else stays optional" and "that's drift, not design" read as composed copy, not as someone typing. State it flat, and keep one sharp line only where it is specific to the thing at hand and earned.
+Cut rhetorical tails that add emphasis but no information, such as "for everyone", "whether you need it or not", or "and it did". Test each one by deleting it. If the sentence still says the same thing, or the phrase would fit any other topic unchanged, it was decoration.
+Do not perform casualness. Folksy images such as "the whole pile", and giving things human actions such as "the docs disagreed while they did it", are the writing trying to sound relaxed. State the fact plainly instead.
 Delete empty -ing clauses such as "highlighting", "ensuring", and "showcasing". Name the actor and action when they matter.
 Punctuation and layout
 Do not use em dashes. Do not replace them with en dashes, hyphens, or unnecessary parentheses. Use a comma or start a new sentence.
