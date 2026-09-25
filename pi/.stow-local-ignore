@@ -3,3 +3,9 @@
 ^/setup\.sh$
 ^/test(?:/|$)
 ^/\.pi/agent/models\.json\.example$
+^/\.pi/agent/models\.json$
+^/\.pi/agent/models\.json\.bak$
+^/\.pi/agent/auth\.json$
+^/\.pi/agent/trust\.json$
+^/\.pi/agent/models-store\.json$
+^/\.pi/agent/(?:sessions|missions|npm|git)(?:/|$)

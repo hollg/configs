@@ -56,6 +56,25 @@ remove_matching_file() {
     rm "$target"
 }
 
+is_managed_link() {
+    local source="$1"
+    local target="$2"
+
+    [[ -L "$target" && "$source" -ef "$target" ]]
+}
+
+module_is_stowed() {
+    local agent
+
+    is_managed_link "$source_agent_dir/settings.json" "$agent_dir/settings.json" || return 1
+    for agent in planner reviewer scout worker; do
+        is_managed_link "$source_agent_dir/agents/$agent.md" "$agent_dir/agents/$agent.md" || return 1
+    done
+    is_managed_link \
+        "$source_agent_dir/extensions/pi-rtk-optimizer/config.json" \
+        "$agent_dir/extensions/pi-rtk-optimizer/config.json"
+}
+
 main() {
     local retired_links=(
         "$agent_dir/prompts/feature.md"
@@ -72,6 +91,11 @@ main() {
     require_real_dir "$agent_dir/extensions"
     require_real_dir "$agent_dir/extensions/pi-rtk-optimizer"
     require_real_dir "$agent_dir/prompts"
+
+    if module_is_stowed; then
+        print_success "Pi module is already applied"
+        return
+    fi
 
     if [[ -e "$agent_dir/settings.json" || -L "$agent_dir/settings.json" ]]; then
         if [[ -L "$agent_dir/settings.json" || ! -f "$agent_dir/settings.json" ]]; then

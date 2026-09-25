@@ -5,6 +5,15 @@ repo_root="$(cd "$(dirname "$0")/../.." && pwd)"
 temp_root="$(mktemp -d)"
 trap 'rm -rf "$temp_root"' EXIT
 
+assert_absent() {
+    local path="$1"
+
+    if [[ -e "$path" || -L "$path" ]]; then
+        echo "expected $path to be absent" >&2
+        exit 1
+    fi
+}
+
 prepare_fixture() {
     local home="$1"
     local agent_dir="$home/.pi/agent"
@@ -28,11 +37,11 @@ assert_migrated() {
 
     test -f "$home/.pi/agent/models.json"
     grep -qx 'local-model-marker' "$home/.pi/agent/models.json"
-    test ! -e "$home/.pi/agent/prompts/feature.md" && test ! -L "$home/.pi/agent/prompts/feature.md"
-    test ! -e "$home/.pi/agent/prompts/implement.md" && test ! -L "$home/.pi/agent/prompts/implement.md"
-    test ! -e "$home/.pi/agent/prompts/scout-and-plan.md" && test ! -L "$home/.pi/agent/prompts/scout-and-plan.md"
-    test ! -e "$home/.pi/agent/prompts/implement-and-review.md" && test ! -L "$home/.pi/agent/prompts/implement-and-review.md"
-    test ! -e "$home/.pi/agent/extensions/mash" && test ! -L "$home/.pi/agent/extensions/mash"
+    assert_absent "$home/.pi/agent/prompts/feature.md"
+    assert_absent "$home/.pi/agent/prompts/implement.md"
+    assert_absent "$home/.pi/agent/prompts/scout-and-plan.md"
+    assert_absent "$home/.pi/agent/prompts/implement-and-review.md"
+    assert_absent "$home/.pi/agent/extensions/mash"
     test -f "$home/.pi/agent/settings.json.pre-pi-module"
     test ! -e "$home/.pi/agent/settings.json"
     test ! -e "$home/.pi/agent/agents/planner.md"
@@ -43,8 +52,19 @@ home="$temp_root/matching"
 prepare_fixture "$home"
 HOME="$home" bash "$repo_root/pi/setup.sh"
 assert_migrated "$home"
+stow --no-folding --dir "$repo_root" --target "$home" pi
 HOME="$home" bash "$repo_root/pi/setup.sh"
-assert_migrated "$home"
+test -f "$home/.pi/agent/models.json"
+grep -qx 'local-model-marker' "$home/.pi/agent/models.json"
+assert_absent "$home/.pi/agent/prompts/feature.md"
+assert_absent "$home/.pi/agent/prompts/implement.md"
+assert_absent "$home/.pi/agent/prompts/scout-and-plan.md"
+assert_absent "$home/.pi/agent/prompts/implement-and-review.md"
+assert_absent "$home/.pi/agent/extensions/mash"
+test -f "$home/.pi/agent/settings.json.pre-pi-module"
+test -L "$home/.pi/agent/settings.json"
+test -L "$home/.pi/agent/agents/planner.md"
+test -L "$home/.pi/agent/extensions/pi-rtk-optimizer/config.json"
 
 modified_home="$temp_root/modified"
 prepare_fixture "$modified_home"

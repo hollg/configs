@@ -42,7 +42,19 @@ stow --no-folding pi
 pi update --extensions
 ```
 
-`setup.sh` backs up the existing `settings.json`, removes only the retired Pi links, and verifies matching managed files before Stow replaces them. It does not modify models, credentials, sessions, or package code.
+`setup.sh` backs up the existing `settings.json`, removes only the retired Pi links, and verifies matching managed files before Stow replaces them. It does not modify models, credentials, sessions, or package code. After Stow applies the module, rerunning `setup.sh` reports that the module is already applied.
+
+## Worktrees
+
+Run Stow from the durable repository checkout, not a disposable Git worktree. Stow links point at the checkout that runs the command.
+
+If you apply the module from a worktree, merge its branch first. Then, from the durable checkout, run:
+
+```bash
+stow -R --no-folding pi
+```
+
+Remove the worktree only after that command completes.
 
 ## Configure models
 
