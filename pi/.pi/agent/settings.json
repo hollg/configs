@@ -1,0 +1,19 @@
+{
+  "theme": "catppuccin-tui-mocha",
+  "tuiMode": "fullscreen",
+  "packages": [
+    "npm:pi-catppuccin-tui",
+    "git:github.com/obra/superpowers",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:pi-clear",
+    "git:github.com/elpapi42/pi-fork",
+    "git:github.com/MasuRii/pi-rtk-optimizer",
+    "git:github.com/elpapi42/pi-observational-memory",
+    "git:github.com/elpapi42/pi-minimal-subagent"
+  ],
+  "compaction": {
+    "enabled": true
+  },
+  "hideThinkingBlock": true
+}

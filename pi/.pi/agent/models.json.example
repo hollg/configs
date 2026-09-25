@@ -1,0 +1,15 @@
+{
+  "providers": {
+    "example": {
+      "baseUrl": "https://example.invalid/v1",
+      "api": "openai-completions",
+      "apiKey": "$PI_PROVIDER_API_KEY",
+      "models": [
+        {
+          "id": "replace-with-approved-model-id",
+          "name": "Replace with approved model name"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,5 @@
+^/README\.md$
+^/install\.sh$
+^/setup\.sh$
+^/test(?:/|$)
+^/\.pi/agent/models\.json\.example$
