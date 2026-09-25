@@ -20,5 +20,8 @@ Thumbs.db
 # Local configuration files
 *.local
 
+# Isolated Git worktrees
+.worktrees/
+
 # tmux plugin installations
 tmux/.config/tmux/plugins
