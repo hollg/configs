@@ -63,7 +63,7 @@ is_managed_link() {
     [[ -L "$target" && "$source" -ef "$target" ]]
 }
 
-module_is_stowed() {
+public_module_is_stowed() {
     local agent
 
     is_managed_link "$source_agent_dir/settings.json" "$agent_dir/settings.json" || return 1
@@ -73,6 +73,43 @@ module_is_stowed() {
     is_managed_link \
         "$source_agent_dir/extensions/pi-rtk-optimizer/config.json" \
         "$agent_dir/extensions/pi-rtk-optimizer/config.json"
+}
+
+module_is_stowed() {
+    local source_model="$source_agent_dir/models.json"
+    local target_model="$agent_dir/models.json"
+
+    public_module_is_stowed || return 1
+    [[ ! -e "$source_model" && ! -L "$source_model" ]] || is_managed_link "$source_model" "$target_model"
+}
+
+migrate_model_config() {
+    local source_model="$source_agent_dir/models.json"
+    local target_model="$agent_dir/models.json"
+
+    if [[ -e "$source_model" || -L "$source_model" ]]; then
+        if [[ -L "$source_model" || ! -f "$source_model" ]]; then
+            print_error "$source_model is not a regular file; refusing to replace it"
+            exit 1
+        fi
+        if [[ -e "$target_model" || -L "$target_model" ]]; then
+            if is_managed_link "$source_model" "$target_model"; then
+                return
+            fi
+            print_error "$target_model already exists; refusing to overwrite it"
+            exit 1
+        fi
+        return
+    fi
+
+    [[ ! -e "$target_model" && ! -L "$target_model" ]] && return
+    if [[ -L "$target_model" || ! -f "$target_model" ]]; then
+        print_error "$target_model is not a regular file; refusing to move it"
+        exit 1
+    fi
+
+    mv "$target_model" "$source_model"
+    print_success "Moved $target_model into the ignored Pi module source"
 }
 
 main() {
@@ -92,8 +129,16 @@ main() {
     require_real_dir "$agent_dir/extensions/pi-rtk-optimizer"
     require_real_dir "$agent_dir/prompts"
 
+    migrate_model_config
+
     if module_is_stowed; then
         print_success "Pi module is already applied"
+        return
+    fi
+
+    if public_module_is_stowed; then
+        print_success "Pi model configuration is ready"
+        echo "Run: stow -R --no-folding pi"
         return
     fi
 

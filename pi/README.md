@@ -11,25 +11,28 @@ pi/.pi/agent/
 ├── agents/                              → ~/.pi/agent/agents/
 ├── extensions/pi-rtk-optimizer/config.json
 │                                         → ~/.pi/agent/extensions/pi-rtk-optimizer/config.json
+├── models.json                          → ~/.pi/agent/models.json
 └── settings.json                        → ~/.pi/agent/settings.json
 ```
 
-`settings.json` declares Pi's public packages, Catppuccin Mocha theme, and interface preferences. `models.json.example` stays in the repository as a reference but Stow does not deploy it.
+`settings.json` declares Pi's public packages, Catppuccin Mocha theme, and interface preferences. `models.json` is a local, Git-ignored source file. `models.json.example` stays in the repository as a reference but Stow does not deploy it.
 
 ## Private local state
 
-Pi keeps provider models, credentials, sessions, trust data, caches, and package installations local. This module does not manage or read them.
+Pi keeps credentials, sessions, trust data, caches, and package installations as real local state. The module manages the model configuration only as a Git-ignored local file.
 
-Keep these paths outside Git:
+These paths are Git-ignored if they exist in the module:
 
-- `~/.pi/agent/models.json`
-- `~/.pi/agent/auth.json`
-- `~/.pi/agent/trust.json`
-- `~/.pi/agent/models-store.json`
-- `~/.pi/agent/sessions/`
-- `~/.pi/agent/missions/`
-- `~/.pi/agent/npm/`
-- `~/.pi/agent/git/`
+- `pi/.pi/agent/models.json`
+- `pi/.pi/agent/auth.json`
+- `pi/.pi/agent/trust.json`
+- `pi/.pi/agent/models-store.json`
+- `pi/.pi/agent/sessions/`
+- `pi/.pi/agent/missions/`
+- `pi/.pi/agent/npm/`
+- `pi/.pi/agent/git/`
+
+Do not create or Stow the non-model runtime paths.
 
 ## Install and apply
 
@@ -42,7 +45,7 @@ stow --no-folding pi
 pi update --extensions
 ```
 
-`setup.sh` backs up the existing `settings.json`, removes only the retired Pi links, and verifies matching managed files before Stow replaces them. It does not modify models, credentials, sessions, or package code. After Stow applies the module, rerunning `setup.sh` reports that the module is already applied.
+`setup.sh` moves an existing `~/.pi/agent/models.json` into the ignored module source, backs up the existing `settings.json`, removes only the retired Pi links, and verifies matching managed files before Stow replaces them. It does not modify credentials, sessions, or package code. After Stow applies the module, rerunning `setup.sh` reports that the module is already applied.
 
 ## Worktrees
 
@@ -58,13 +61,14 @@ Remove the worktree only after that command completes.
 
 ## Configure models
 
-Copy the generic example, then fill it from the approved internal source:
+Copy the generic example into the ignored local source, then fill it from the approved internal source:
 
 ```bash
-cp pi/.pi/agent/models.json.example ~/.pi/agent/models.json
+cp pi/.pi/agent/models.json.example pi/.pi/agent/models.json
+stow -R --no-folding pi
 ```
 
-Do not add provider details to this repository.
+Do not add provider details to Git.
 
 ## Update
 

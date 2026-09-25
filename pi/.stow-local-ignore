@@ -3,7 +3,6 @@
 ^/setup\.sh$
 ^/test(?:/|$)
 ^/\.pi/agent/models\.json\.example$
-^/\.pi/agent/models\.json$
 ^/\.pi/agent/models\.json\.bak$
 ^/\.pi/agent/auth\.json$
 ^/\.pi/agent/trust\.json$

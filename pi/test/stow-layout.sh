@@ -40,11 +40,23 @@ test -L "$target/.pi/agent/settings.json"
 test -L "$target/.pi/agent/agents/planner.md"
 test -L "$target/.pi/agent/extensions/pi-rtk-optimizer/config.json"
 assert_absent "$target/.pi/agent/models.json.example"
-assert_absent "$target/.pi/agent/models.json"
+test -L "$target/.pi/agent/models.json"
 assert_absent "$target/.pi/agent/models.json.bak"
 assert_absent "$target/.pi/agent/auth.json"
 assert_absent "$target/.pi/agent/trust.json"
 assert_absent "$target/.pi/agent/models-store.json"
+for path in \
+    pi/.pi/agent/models.json \
+    pi/.pi/agent/models.json.bak \
+    pi/.pi/agent/auth.json \
+    pi/.pi/agent/trust.json \
+    pi/.pi/agent/models-store.json \
+    pi/.pi/agent/sessions/marker \
+    pi/.pi/agent/missions/marker \
+    pi/.pi/agent/npm/marker \
+    pi/.pi/agent/git/marker; do
+    git -C "$repo_root" check-ignore -q "$path"
+done
 for dir in sessions missions npm git; do
     assert_absent "$target/.pi/agent/$dir"
 done
