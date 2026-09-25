@@ -13,6 +13,8 @@ prepare_fixture() {
     printf '%s\n' 'local-model-marker' > "$agent_dir/models.json"
     cp "$repo_root/pi/.pi/agent/settings.json" "$agent_dir/settings.json"
     cp "$repo_root/pi/.pi/agent/agents/"*.md "$agent_dir/agents/"
+    mv "$agent_dir/agents/planner.md" "$agent_dir/planner-link-target.md"
+    ln -s "$agent_dir/planner-link-target.md" "$agent_dir/agents/planner.md"
     cp "$repo_root/pi/.pi/agent/extensions/pi-rtk-optimizer/config.json" "$agent_dir/extensions/pi-rtk-optimizer/config.json"
     ln -s /missing-feature "$agent_dir/prompts/feature.md"
     ln -s /missing-implement "$agent_dir/prompts/implement.md"

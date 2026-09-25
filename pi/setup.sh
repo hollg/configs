@@ -41,10 +41,6 @@ validate_matching_file() {
     local target="$2"
 
     [[ ! -e "$target" && ! -L "$target" ]] && return
-    if [[ -L "$target" ]]; then
-        print_error "$target is already a symlink; run stow -D pi before setup"
-        exit 1
-    fi
     if ! cmp -s "$source" "$target"; then
         print_error "$target differs from $source; refusing to remove it"
         exit 1
