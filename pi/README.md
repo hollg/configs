@@ -8,6 +8,7 @@ The module mirrors Pi's user agent directory:
 
 ```text
 pi/.pi/agent/
+├── APPEND_SYSTEM.md                     → ~/.pi/agent/APPEND_SYSTEM.md
 ├── agents/                              → ~/.pi/agent/agents/
 ├── extensions/pi-rtk-optimizer/config.json
 │                                         → ~/.pi/agent/extensions/pi-rtk-optimizer/config.json
@@ -15,7 +16,7 @@ pi/.pi/agent/
 └── settings.json                        → ~/.pi/agent/settings.json
 ```
 
-`settings.json` declares Pi's public packages, Catppuccin Mocha theme, and interface preferences. `models.json` is a local, Git-ignored source file. `models.json.example` stays in the repository as a reference but Stow does not deploy it.
+`APPEND_SYSTEM.md` adds Pi-only system instructions. `settings.json` declares Pi's public packages, Catppuccin Mocha theme, and interface preferences. `models.json` is a local, Git-ignored source file. `models.json.example` stays in the repository as a reference but Stow does not deploy it.
 
 ## Private local state
 

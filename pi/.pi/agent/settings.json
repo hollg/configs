@@ -3,7 +3,6 @@
   "tuiMode": "fullscreen",
   "packages": [
     "npm:pi-catppuccin-tui",
-    "git:github.com/obra/superpowers",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-clear",
@@ -15,5 +14,6 @@
   "compaction": {
     "enabled": true
   },
-  "hideThinkingBlock": true
+  "hideThinkingBlock": true,
+  "lastChangelogVersion": "0.87.1"
 }

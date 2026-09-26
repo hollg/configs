@@ -36,6 +36,7 @@ mkdir -p "$target/.pi/agent/agents" "$target/.pi/agent/extensions/pi-rtk-optimiz
 stow --simulate --no-folding --dir "$package_root" --target "$target" pi
 stow --no-folding --dir "$package_root" --target "$target" pi
 
+test -L "$target/.pi/agent/APPEND_SYSTEM.md"
 test -L "$target/.pi/agent/settings.json"
 test -L "$target/.pi/agent/agents/planner.md"
 test -L "$target/.pi/agent/extensions/pi-rtk-optimizer/config.json"
