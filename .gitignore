@@ -23,5 +23,6 @@ Thumbs.db
 # Isolated Git worktrees
 .worktrees/
 
-# tmux plugin installations
+# tmux plugin installations and host overrides
 tmux/.config/tmux/plugins
+tmux/.config/tmux/local.conf

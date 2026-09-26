@@ -15,19 +15,23 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Which plugins would you like to load?
-plugins=(
-    git
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    zsh-nvm
-    brew
-    macos
-    node
-    npm
-)
+plugins=(git brew node npm)
+
+if [[ "$OSTYPE" == darwin* ]]; then
+    plugins+=(macos)
+fi
+
+for plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+    [[ -d "$ZSH/custom/plugins/$plugin" ]] && plugins+=("$plugin")
+done
 
 # Source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
+if [[ -s "$HOME/.nvm/nvm.sh" ]]; then
+    export NVM_DIR="$HOME/.nvm"
+    source "$NVM_DIR/nvm.sh"
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

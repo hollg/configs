@@ -2,8 +2,9 @@
 # Configuration for login shells
 
 # Homebrew
-if [[ -f "/opt/homebrew/bin/brew" ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ -f "/usr/local/bin/brew" ]]; then
-    eval "$(/usr/local/bin/brew shellenv)"
-fi
+for brew in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+    if [[ -x "$brew" ]]; then
+        eval "$("$brew" shellenv)"
+        break
+    fi
+done
