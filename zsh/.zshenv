@@ -18,3 +18,8 @@ export LC_ALL=en_GB.UTF-8
 # Load environment variables (secrets) - available to all zsh sessions
 [[ -r "$HOME/configs/zsh/.env" ]] && source "$HOME/configs/zsh/.env"
 [[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
+if [[ -s "$HOME/.nvm/nvm.sh" ]]; then
+    export NVM_DIR="$HOME/.nvm"
+    source "$NVM_DIR/nvm.sh"
+fi
