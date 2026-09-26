@@ -3,7 +3,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
 		options = {
-			theme = "catppuccin",
+			theme = "catppuccin-mocha",
 			icons_enabled = true,
 		},
 		sections = {
