@@ -13,6 +13,8 @@ pi/.pi/agent/
 ├── extensions/pi-rtk-optimizer/config.json
 │                                         → ~/.pi/agent/extensions/pi-rtk-optimizer/config.json
 ├── models.json                          → ~/.pi/agent/models.json
+├── models.json.example                  reference only
+├── model-aliases.json.example           reference only
 └── settings.json                        → ~/.pi/agent/settings.json
 ```
 
@@ -70,6 +72,24 @@ stow -R --no-folding pi
 ```
 
 Do not add provider details to Git.
+
+## Configure model aliases
+
+The shared extension at `.pi/agent/extensions/pi-model-aliases` provides stable
+aliases for the main session and named subagents. Configure the aliases per machine in the ignored `.pi/agent/model-aliases.json` file:
+
+```bash
+cp pi/.pi/agent/model-aliases.json.example pi/.pi/agent/model-aliases.json
+```
+
+Then replace the placeholder provider and model IDs with local values. The example file contains no provider details.
+
+`aliasProvider` is a local stable name. It lets each machine map `primary` to a
+different provider without putting provider details in Git. The source provider
+and model IDs stay in the ignored local files.
+
+The named agents use `fast`, `balanced`, and `powerful`, so their model choices
+follow the local alias configuration.
 
 ## Update
 

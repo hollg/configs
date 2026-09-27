@@ -15,5 +15,17 @@
     "enabled": true
   },
   "hideThinkingBlock": true,
+  "defaultProvider": "primary",
+  "defaultThinkingLevel": "medium",
+  "extensions": ["extensions/pi-model-aliases"],
+  "pi-fork": {
+    "extensions": [],
+    "offline": true,
+    "costFooter": true
+  },
+  "pi-minimal-subagent": {
+    "model": null,
+    "extensions": ["extensions/pi-model-aliases"]
+  },
   "lastChangelogVersion": "0.87.1"
 }

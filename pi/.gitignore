@@ -1,5 +1,6 @@
 # Local Pi configuration and runtime state
 /.pi/agent/models.json
+/.pi/agent/model-aliases.json
 /.pi/agent/models.json.bak
 /.pi/agent/auth.json
 /.pi/agent/trust.json

@@ -1,0 +1,10 @@
+{
+  "provider": "local-provider-name",
+  "aliasProvider": "primary",
+  "defaultAlias": "balanced",
+  "aliases": {
+    "fast": "provider-model-id",
+    "balanced": "provider-model-id",
+    "powerful": "provider-model-id"
+  }
+}
