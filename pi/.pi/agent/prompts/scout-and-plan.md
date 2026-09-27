@@ -1,19 +1,9 @@
 ---
-description: Investigate code and produce an implementation plan (no changes)
-argument-hint: "<task to scout and plan>"
+description: Scout gathers context, planner creates implementation plan (no implementation)
 ---
+Use the subagent tool with the chain parameter to execute this workflow:
 
-Scout and plan the following task. Do NOT make any changes — this is read-only.
+1. First, use the "scout" agent to find all code relevant to: $@
+2. Then, use the "planner" agent to create an implementation plan for "$@" using the context from the previous step (use {previous} placeholder)
 
-$@
-
-## Workflow
-Call the `subagent` tool twice, sequentially:
-
-1. **scout** — "Thoroughly investigate the relevant code for: $@. Return files with line ranges, key types/functions, architecture, and a 'Start Here' recommendation."
-2. **planner** — Pass the scout's full output and "$@" and ask: "Produce a concrete implementation plan: goals, numbered steps, files to modify, new files, risks."
-
-## Rules
-- Feed the planner the scout's entire output — the planner has NOT seen the code
-- Neither agent may edit files
-- Present the final plan to the user for approval. Do not start implementation unless explicitly told
+Execute this as a chain, passing output between steps via {previous}. Do NOT implement - just return the plan.

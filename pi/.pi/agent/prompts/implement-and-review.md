@@ -1,20 +1,10 @@
 ---
-description: Implement a change, then review it for quality and security
-argument-hint: "<description of the change>"
+description: Worker implements, reviewer reviews, worker applies feedback
 ---
+Use the subagent tool with the chain parameter to execute this workflow:
 
-Implement the following change, then have it reviewed. You may make changes.
+1. First, use the "worker" agent to implement: $@
+2. Then, use the "reviewer" agent to review the implementation from the previous step (use {previous} placeholder)
+3. Finally, use the "worker" agent to apply the feedback from the review (use {previous} placeholder)
 
-$@
-
-## Workflow
-Call the `subagent` tool sequentially:
-
-1. **worker** — "Execute this task: $@. When done, report what you completed, files changed, and key functions/types touched."
-2. **reviewer** — Pass the worker's output (files changed, functions touched) and ask: "Review the changes the worker made for $@. Use git diff and read the modified files. Report Critical, Warning, Suggestion findings with file:line references."
-
-## Rules
-- Feed the reviewer the worker's full report — the reviewer has NOT seen the worker's session
-- The reviewer is strictly read-only
-- After the review, fix any Critical findings yourself (or delegate back to worker for the fix), then re-verify
-- Report: what was implemented, review findings, and what you fixed
+Execute this as a chain, passing output between steps via {previous}.

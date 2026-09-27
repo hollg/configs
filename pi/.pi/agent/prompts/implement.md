@@ -1,21 +1,10 @@
 ---
-description: Scout, plan, then implement a change
-argument-hint: "<description of the change>"
+description: Full implementation workflow - scout gathers context, planner creates plan, worker implements
 ---
+Use the subagent tool with the chain parameter to execute this workflow:
 
-Implement the following task using the scout → planner → worker chain:
+1. First, use the "scout" agent to find all code relevant to: $@
+2. Then, use the "planner" agent to create an implementation plan for "$@" using the context from the previous step (use {previous} placeholder)
+3. Finally, use the "worker" agent to implement the plan from the previous step (use {previous} placeholder)
 
-$@
-
-## Workflow
-Call the `subagent` tool three times, sequentially:
-
-1. **scout** — "Thoroughly investigate the relevant code for: $@. Return files, key types/functions, and how the pieces connect."
-2. **planner** — Pass the scout's findings and "$@" and ask for a concrete implementation plan (steps, files to modify, risks).
-3. **worker** — Pass the plan and "$@" and instruct: "Execute this plan exactly. Confirm when done."
-
-## Rules
-- Feed each agent the previous agent's full output — they have NOT seen the earlier steps
-- The worker may edit files; scout and planner are read-only
-- After the worker finishes, verify the change yourself: run the relevant tests
-- Report the final result with files changed and test outcome
+Execute this as a chain, passing output between steps via {previous}.
