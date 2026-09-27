@@ -12,6 +12,8 @@ pi/.pi/agent/
 ├── agents/                              → ~/.pi/agent/agents/
 ├── extensions/pi-rtk-optimizer/config.json
 │                                         → ~/.pi/agent/extensions/pi-rtk-optimizer/config.json
+├── extensions/web-research/
+│                                         → ~/.pi/agent/extensions/web-research/ (web_search + web_fetch tools)
 ├── models.json                          → ~/.pi/agent/models.json
 ├── models.json.example                  reference only
 ├── model-aliases.json.example           reference only
