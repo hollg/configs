@@ -5,11 +5,9 @@
     "npm:pi-catppuccin-tui",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@juicesharp/rpiv-todo",
-    "npm:pi-clear",
     "git:github.com/elpapi42/pi-fork",
     "git:github.com/MasuRii/pi-rtk-optimizer",
-    "git:github.com/elpapi42/pi-observational-memory",
-    "git:github.com/elpapi42/pi-minimal-subagent"
+    "git:github.com/elpapi42/pi-observational-memory"
   ],
   "compaction": {
     "enabled": true
@@ -22,10 +20,6 @@
     "extensions": [],
     "offline": true,
     "costFooter": true
-  },
-  "pi-minimal-subagent": {
-    "model": null,
-    "extensions": ["extensions/pi-model-aliases"]
   },
   "lastChangelogVersion": "0.87.1"
 }
