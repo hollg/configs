@@ -10,7 +10,7 @@ For tasks larger than a small local edit:
 
 1. Inspect the repository and understand the current behaviour.
 2. Propose a small implementation plan before editing.
-3. If the task has substantial uncertainty, use one or two read-only forks or named subagents.
+3. If the task has substantial uncertainty, use one or two named subagents.
 4. Keep implementation ownership in the current session.
 5. Do not run parallel agents that edit overlapping files.
 6. After editing, run the narrowest relevant tests and format changed files.
@@ -31,27 +31,58 @@ until the user explicitly asks to fix it.
 When unsure, ask: "Should I proceed with implementing this, or do you want to
 review the plan first?"
 
-Use `fork` for one-off investigation, review, testing, or option analysis.
-Use named subagents for repeatable roles such as `scout`, `planner`, `reviewer`, and `worker`.
-State whether delegated work may edit files. Read-only investigations should return findings with file references and no edits.
+Use named subagents for repeatable roles such as `scout`, `planner`, `reviewer`, and `worker`. State whether delegated work may edit files.
 
 ## Tool selection
 
-Choose the right delegation mechanism based on the task type:
+Choose how to handle a task, from cheapest to most expensive:
 
-| Task type | Tool | Why |
+| Task type | Approach | Why |
 |---|---|---|
-| "Find all the X code and explain how it works" | `subagent` (scout) | Structured recon, cheap model, returns compressed context |
-| "Make a plan for X" | `subagent` (planner) | Produces a plan, never touches files |
-| "Implement X" (concrete plan) | `subagent` (worker) | Full capabilities, isolated context, may edit files |
-| "Review the changes" | `subagent` (reviewer) | Read-only review with structured findings |
-| "Not sure what's wrong / explore options" | `fork` | Needs full context and open-ended judgment |
-| "Should I use approach A or B?" | `fork` | Exploratory option analysis |
-| Big task, predictable steps | Chain subagents (scout → planner → worker) | Each stage narrows the problem; context stays clean |
-| Independent searches | Call `subagent` multiple times in one message | Runs concurrently without extra orchestration |
+| Quick lookup (1 file, 1-2 searches) | Do it inline | Zero overhead, full context, instant. Subagent startup cost isn't worth it.
+| Scoped investigation (2-5 files, 2-3 searches) | Inline, or subagent if >2 searches | Inline is cheaper. Subagent only when the searches feel like noise in the session.
+| Deep investigation (5+ files, tracing dependencies) | `subagent` (scout) | Structured recon, fast model, isolated. Saves the parent session from the noise.
+| "Make a plan for X" | `subagent` (planner) | Produces a plan, never touches files. Planner has no write tools.
+| "Implement X" (concrete plan) | `subagent` (worker) | Full capabilities, isolated context, may edit files.
+| "Review the changes" | `subagent` (reviewer) | Read-only review with structured findings.
+| Big task, predictable steps | Chain subagents (scout → planner → worker) | Each stage narrows the problem; context stays clean.
+| Independent searches | Call `subagent` multiple times in one message | Runs concurrently without extra orchestration.
+
+### When NOT to subagent
+
+Every subagent costs: process spawn + resource discovery + fresh system prompt build +
+full context window from scratch. If the task can be done in 1-2 tool calls inline,
+just do it inline. The subagent overhead (hundreds of ms startup, prompt-cache writes,
+transferring context via task text) only pays off when the work is large enough to
+justify the fresh start.
+
+### When to go inline instead
+
+- You already have the relevant files open in context
+- The task is a single grep / read / ls
+- You need the conversation history to make the decision
+- The task feels like it will be 1-3 turns at most
+
+### Cost awareness
+
+- Scout uses `primary/fast` (Haiku) — cheap per-token, but the fixed startup cost is
+  the same regardless of model. A 1-turn scout that finds nothing costs almost as
+  much as a 1-turn scout that finds everything.
+- Worker and reviewer use `primary/powerful` (Sonnet) — only delegate when the task
+  genuinely needs the reasoning depth.
+- Chain mode multiplies: scout + planner + worker pays 3 system prompts + 3 context
+  windows. Only use when each stage adds real value that the previous stage couldn't
+  do alone.
+
+### Agent model assignments
+
+| Agent | Model | Tools |
+|-------|-------|-------|
+| scout | `primary/fast` | read, grep, find, ls, bash |
+| planner | `primary/balanced` | read, grep, find, ls |
+| worker | `primary/powerful` | all default |
+| reviewer | `primary/powerful` | read, grep, find, ls, bash (read-only) |
 
 Rules:
-- Worker and reviewer run on `primary/powerful`; scout on `primary/fast`; planner on `primary/balanced`
 - Feed each agent in a chain the previous agent's full output — they have not seen the earlier steps
-- Do NOT fork for tasks that map cleanly to a named subagent role
-- Read-only investigations must return findings with file references and no edits
+- When a subagent returns with file changes, re-read those files to refresh context in the parent session
