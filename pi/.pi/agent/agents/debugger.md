@@ -47,3 +47,9 @@ Concrete change: file, line(s), before/after.
 
 ## Confirmation
 How to verify the fix works — test to run, log to check, command to execute.
+
+## Handoff (to fixer/worker)
+- **Root cause**: file.ts:42 — what's wrong
+- **Fix required**: One-sentence description of what change is needed
+- **Evidence**: What confirms this is the right fix
+- **Confirmation**: How to verify the fix

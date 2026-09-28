@@ -33,3 +33,8 @@ Output format:
 Overall assessment in 2-3 sentences.
 
 Be specific with file paths and line numbers.
+
+## Handoff (to main agent)
+- **Approved**: Files that look good
+- **Needs changes**: Files with critical/warning issues — what to fix
+- **Recommendations**: Suggestions the main agent should consider

@@ -22,3 +22,9 @@ Anything the main agent should know.
 If handing off to another agent (e.g. reviewer), include:
 - Exact file paths changed
 - Key functions/types touched (short list)
+
+## Handoff (to reviewer or next agent)
+- **Files changed**: path/file.ts — summary of change per file
+- **Key decisions**: Why certain approaches were chosen
+- **Risk areas**: What to scrutinize in review
+- **What's left**: Known gaps, edge cases not handled, assumptions made

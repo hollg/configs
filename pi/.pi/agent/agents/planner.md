@@ -35,3 +35,10 @@ Numbered steps, each small and actionable:
 Anything to watch out for.
 
 Keep the plan concrete. The worker agent will execute it verbatim.
+
+## Handoff (to worker)
+- **Files to create**: path/to/new.ts — purpose
+- **Files to modify**: path/to/existing.ts — what to change
+- **Implementation order**: Step by step
+- **Pitfalls to avoid**: Things that would break or regress
+- **Test approach**: How to verify the implementation

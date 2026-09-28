@@ -59,19 +59,17 @@ tracing).
 **Fix location:** `APPEND_SYSTEM.md` (decision table) + scout agent definition (output
 format notes on expected output size per thoroughness level).
 
-### 3. Context transfer strategy undefined
+### 3. Context transfer strategy undefined (✅ Fixed)
 
 Rule says "feed each agent in a chain the previous agent's full output." There is no
-cap or summarisation step. A thorough scout could return 30KB. If the planner then
-loads that + its own system prompt + tool definitions, context limits are at risk.
+cap or summarisation step.
 
-Chained agents have not seen the earlier steps — they get everything via the
-`{previous}` placeholder. There needs to be an expectation of output discipline at
-each stage.
+**Fix applied:** Each agent definition now includes a `## Handoff` section as the
+last output section — a dense 3-5 line summary of exactly what the next agent needs.
+This keeps the chain compact even if the full output is verbose.
 
-**Fix location:** Workflow prompts (add output-sizing notes to chain orchestration) +
-agent definitions (output format contracts should specify approximate size targets) +
-extension (chain-mode could cap/truncate oversized intermediate output).
+The extension-level output capping (chain-mode truncation) remains a future
+improvement.
 
 ### 4. No "inline vs delegate" decision rule
 
@@ -131,7 +129,7 @@ on Sonnet.
 |---|-----|-------------|-------------------|--------|
 | 1 | Cost guidance / inline-or-subagent | `APPEND_SYSTEM.md` — expand tool selection table | — | ✅ Done |
 | 2 | Task sizing | `APPEND_SYSTEM.md` (heuristic) + scout output format (size targets per thoroughness) | — | ✅ Done |
-| 3 | Context transfer | Workflow prompts (orchestration notes) + agent definitions (output contracts) | Extension: chain-mode output capping | ❌ Pending |
+| 3 | Context transfer | Agent definitions — output contracts expanded with Handoff sections | Chain prompts reinforce handoff structure | ✅ Done |
 | 4 | Inline vs delegate rule | `APPEND_SYSTEM.md` — add to decision table or as a rule | — | ✅ Done |
 | 5 | Debug subagent | New `debugger.md` agent definition + new `debug-agent.md` workflow prompt | — | ✅ Done |
 | 6 | State sync | `APPEND_SYSTEM.md` — instruction rule | Extension: track mutated files and return their paths | ❌ Pending |
@@ -144,9 +142,10 @@ The fork tool (`pi-fork` package) was removed entirely — uninstalled from
 ## Proposed order of work
 
 1. **`APPEND_SYSTEM.md` bundle** — gaps 1, 2, 4, 7 together. Single file, highest
-   leverage, no code changes.
-2. **Debug subagent** — gap 5. New standalone agent, minimal risk.
-3. **Context transfer discipline** — gap 3. Update workflow prompts + agent definitions.
+   leverage, no code changes. ✅ Done
+2. **Debug subagent** — gap 5. New standalone agent, minimal risk. ✅ Done
+3. **Context transfer discipline** — gap 3. Update workflow prompts + agent definitions
+   with Handoff contracts. ✅ Done
 4. **Extension changes** — gaps 3 (chain output cap) and 6 (mutation tracking).
    Requires TypeScript changes to `extensions/subagent/index.ts`.
 5. **State sync rule** — gap 6 instruction component. Simple addition to

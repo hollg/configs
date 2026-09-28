@@ -48,3 +48,9 @@ Brief explanation of how the pieces connect.
 
 ## Start Here
 Which file to look at first and why.
+
+## Handoff (to planner)
+- **Key files**: Short list with line ranges — what each contains
+- **Architecture**: One-line summary of how pieces connect
+- **Relevant interfaces/types**: InterfaceX, TypeY
+- **Uncertainties**: What's unclear, decisions the planner needs to make
