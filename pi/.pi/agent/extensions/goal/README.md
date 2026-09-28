@@ -18,10 +18,11 @@ Work autonomously across multiple turns until a completion condition is met, wit
 ## How it works
 
 1. **`/goal`** sets the target and injects a continuation prompt as a user message.
-2. On each turn, a system-prompt guideline reminds the model of the goal and asks it to end with `[GOAL_MET]` when achieved.
+2. On each turn, a system-prompt guideline reminds the model of the goal, asks it to call `ask_user_question` when it needs your input, and asks it to end with `[GOAL_MET]` when achieved.
 3. After each turn, the extension checks the model's response:
    - Contains `[GOAL_MET]` → goal achieved, loop stops, notification shown.
-   - Turn completed but goal not yet met → `{ continue: true }` fires the next turn.
+   - The model needs your input → it calls `ask_user_question`; Pi adds the answer to the tool result and continues normally.
+   - Turn completed but goal not yet met → the extension adds an internal continuation message, then starts the next turn.
    - Turn errored or aborted → backoff and schedule a retry.
 4. A footer indicator (🎯) shows active turns and elapsed time.
 

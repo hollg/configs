@@ -142,6 +142,8 @@ export default function (pi: ExtensionAPI) {
 		event.systemPromptOptions.promptGuidelines.push(
 			`Goal: You are working toward this goal: ${goal}`,
 			"At the end of each turn, evaluate your progress.",
+			"If you need user input to continue, call ask_user_question. Do not ask in plain text.",
+			"Use one clear question with 2 to 4 concrete options. The tool result is the user's answer.",
 			"If the goal is fully met, end your response with exactly: [GOAL_MET]",
 			"If it is not yet met, continue working. Do not include [GOAL_MET].",
 		);
@@ -183,9 +185,19 @@ export default function (pi: ExtensionAPI) {
 					return { continue: false };
 				}
 
-				// Goal not met yet — reset backoff and continue
+				// Goal not met yet. Add model-visible context before continuing.
 				backoffLevel = 0;
-				return { continue: true };
+				return {
+					entries: [
+						{
+							type: "custom_message",
+							customType: "goal-continuation",
+							content: `Continue working toward the goal: ${goal}`,
+							display: false,
+						},
+					],
+					continue: true,
+				};
 			}
 		}
 
@@ -232,8 +244,8 @@ export default function (pi: ExtensionAPI) {
 			updateFooter();
 			ctx.ui.notify(`🎯 Goal set: "${goal.slice(0, 80)}${goal.length > 80 ? "…" : ""}"`, "info");
 
-			// Inject the goal prompt as a user message to kick things off
-			// The turn_end handler will drive subsequent turns via { continue: true }
+			// Inject the goal prompt as a user message to kick things off.
+			// Subsequent turns receive an internal continuation message.
 			if (goal) {
 				try {
 					pi.sendUserMessage(`I have set a goal: ${goal}`);
