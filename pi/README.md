@@ -16,11 +16,14 @@ pi/.pi/agent/
 │                                         → ~/.pi/agent/extensions/web-research/ (web_search + web_fetch tools)
 ├── models.json                          → ~/.pi/agent/models.json
 ├── models.json.example                  reference only
+├── skills/                              → ~/.pi/agent/skills/
 ├── model-aliases.json.example           reference only
 └── settings.json                        → ~/.pi/agent/settings.json
 ```
 
 `APPEND_SYSTEM.md` adds Pi-only system instructions. `settings.json` declares Pi's public packages, Catppuccin Mocha theme, and interface preferences. `models.json` is a local, Git-ignored source file. `models.json.example` stays in the repository as a reference but Stow does not deploy it.
+
+Add shared Pi skills under `pi/.pi/agent/skills/<skill-name>/SKILL.md`. Stow exposes this directory at `~/.pi/agent/skills`.
 
 ## Private local state
 
