@@ -133,7 +133,7 @@ on Sonnet.
 | 2 | Task sizing | `APPEND_SYSTEM.md` (heuristic) + scout output format (size targets per thoroughness) | — | ✅ Done |
 | 3 | Context transfer | Workflow prompts (orchestration notes) + agent definitions (output contracts) | Extension: chain-mode output capping | ❌ Pending |
 | 4 | Inline vs delegate rule | `APPEND_SYSTEM.md` — add to decision table or as a rule | — | ✅ Done |
-| 5 | Debug subagent | New `debug.md` agent definition + new workflow prompt | — | ❌ Pending |
+| 5 | Debug subagent | New `debugger.md` agent definition + new `debug-agent.md` workflow prompt | — | ✅ Done |
 | 6 | State sync | `APPEND_SYSTEM.md` — instruction rule | Extension: track mutated files and return their paths | ❌ Pending |
 | 7 | Model tiering economics | `APPEND_SYSTEM.md` — note next to model assignment rules | — | ✅ Done |
 
