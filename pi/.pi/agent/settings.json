@@ -6,7 +6,8 @@
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@juicesharp/rpiv-todo",
     "git:github.com/MasuRii/pi-rtk-optimizer",
-    "git:github.com/elpapi42/pi-observational-memory"
+    "git:github.com/elpapi42/pi-observational-memory",
+    "npm:@tintinweb/pi-subagents"
   ],
   "compaction": {
     "enabled": true
@@ -14,6 +15,8 @@
   "hideThinkingBlock": true,
   "defaultProvider": "primary",
   "defaultThinkingLevel": "medium",
-  "extensions": ["extensions/pi-model-aliases"],
+  "extensions": [
+    "extensions/pi-model-aliases"
+  ],
   "lastChangelogVersion": "0.87.1"
 }

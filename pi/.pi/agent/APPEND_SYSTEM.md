@@ -37,16 +37,16 @@ Use named subagents for repeatable roles such as `scout`, `planner`, `reviewer`,
 
 Choose how to handle a task, from cheapest to most expensive:
 
-| Task type | Approach | Why |
+| Tool type | Approach | Why |
 |---|---|---|
 | Quick lookup (1 file, 1-2 searches) | Do it inline | Zero overhead, full context, instant. Subagent startup cost isn't worth it.
-| Scoped investigation (2-5 files, 2-3 searches) | Inline, or subagent if >2 searches | Inline is cheaper. Subagent only when the searches feel like noise in the session.
-| Deep investigation (5+ files, tracing dependencies) | `subagent` (scout) | Structured recon, fast model, isolated. Saves the parent session from the noise.
-| "Make a plan for X" | `subagent` (planner) | Produces a plan, never touches files. Planner has no write tools.
-| "Implement X" (concrete plan) | `subagent` (worker) | Full capabilities, isolated context, may edit files.
-| "Review the changes" | `subagent` (reviewer) | Read-only review with structured findings.
-| Big task, predictable steps | Chain subagents (scout → planner → worker) | Each stage narrows the problem; context stays clean.
-| Independent searches | Call `subagent` multiple times in one message | Runs concurrently without extra orchestration.
+| Scoped investigation (2-5 files, 2-3 searches) | Inline, or `Agent({subagent_type: "scout", …})` if >2 searches | Inline is cheaper. Subagent only when the searches feel like noise in the session.
+| Deep investigation (5+ files, tracing dependencies) | `Agent({subagent_type: "scout", …})` | Structured recon, fast model, isolated. Saves the parent session from the noise.
+| "Make a plan for X" | `Agent({subagent_type: "planner", …})` | Produces a plan, never touches files. Planner has no write tools.
+| "Implement X" (concrete plan) | `Agent({subagent_type: "worker", …})` | Full capabilities, isolated context, may edit files.
+| "Review the changes" | `Agent({subagent_type: "reviewer", …})` | Read-only review with structured findings.
+| Big task, predictable steps | Sequential `Agent` calls or `SubagentWorkflow({script: …})` | Each stage narrows the problem; context stays clean.
+| Independent searches | Multiple `Agent({run_in_background: true})` calls and `get_subagent_result` | Runs concurrently without extra orchestration.
 
 ### When NOT to subagent
 
@@ -70,7 +70,7 @@ justify the fresh start.
   much as a 1-turn scout that finds everything.
 - Worker and reviewer use `primary/powerful` (Sonnet) — only delegate when the task
   genuinely needs the reasoning depth.
-- Chain mode multiplies: scout + planner + worker pays 3 system prompts + 3 context
+- Chaining agents sequentially multiplies: scout + planner + worker pays 3 system prompts + 3 context
   windows. Only use when each stage adds real value that the previous stage couldn't
   do alone.
 
@@ -84,5 +84,6 @@ justify the fresh start.
 | reviewer | `primary/powerful` | read, grep, find, ls, bash (read-only) |
 
 Rules:
-- Feed each agent in a chain the previous agent's full output — they have not seen the earlier steps
-- When a subagent returns with file changes, re-read those files to refresh context in the parent session
+- When chaining agents sequentially (`scout → planner → worker`), feed each the previous agent's full output — they have not seen the earlier steps
+- When an `Agent({subagent_type: "worker", …})` returns with file changes via the completion notification, re-read those files to refresh context in the parent session
+- For background agents, use `get_subagent_result({agent_id, verbose: true})` to retrieve full output when needed

@@ -1,9 +1,9 @@
 ---
 description: Scout gathers context, planner creates implementation plan (no implementation)
 ---
-Use the subagent tool with the chain parameter to execute this workflow:
+Execute this as a sequential workflow using `Agent` calls:
 
-1. First, use the "scout" agent to find all code relevant to: $@
-2. Then, use the "planner" agent to create an implementation plan for "$@" using the context from the previous step (use {previous} placeholder)
+1. First, call `Agent({subagent_type: "scout", prompt: "Find all code relevant to: $@", description: "Scout codebase for context", run_in_background: false})` to gather context.
+2. Then, call `Agent({subagent_type: "planner", prompt: "Create an implementation plan for $@ using this context: [scout's full output]", description: "Create implementation plan", run_in_background: false})`.
 
-Execute this as a chain, passing output between steps via {previous}. Do NOT implement - just return the plan.
+Feed the scout's full output text into the planner's prompt (both agents run in the foreground, so their output is available inline). Do NOT implement — just return the plan.

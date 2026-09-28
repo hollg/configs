@@ -3,6 +3,14 @@
 Assessment of the current subagent instructions (`APPEND_SYSTEM.md`, agent definitions,
 workflow prompts) and where each gap is best solved.
 
+**Update (2026-09-28):** Switched from custom `extensions/subagent/index.ts` to
+`@tintinweb/pi-subagents` (installed via `pi install npm:@tintinweb/pi-subagents`).
+The public package handles gaps 3 (chain output capping via `SubagentWorkflow` + `maxOutput`)
+and 6 (mutation tracking via `changed-files` acceptance evidence + tool call capture)
+more thoroughly than the custom extension did. Custom agent `.md` files at
+`~/.pi/agent/agents/` are compatible as-is — the new package discovers them from the
+global agents directory.
+
 **Update (2025-03-15):** Fork tool removed entirely. `pi-fork` package uninstalled from
 `settings.json`, all fork references stripped from `APPEND_SYSTEM.md`, and the decision
 framework simplified to a three-way choice (inline, subagent, subagent chain).
@@ -15,9 +23,9 @@ The `fork` mechanism (session forking via `/fork` command) still exists for manu
 | Layer | Location | What it controls |
 |-------|----------|-----------------|
 | System instructions | `APPEND_SYSTEM.md` | Decision rules, heuristics, cost awareness (loaded every session) |
-| Agent definitions | `.pi/agent/agents/*.md` | Role contract: tools, model, output format (loaded per subagent spawn) |
+| Agent definitions | `.pi/agent/agents/*.md` | Role contract: tools, model, output format (discovered by `@tintinweb/pi-subagents` from global agents dir) |
 | Workflow prompts | `.pi/agent/prompts/*.md` | Orchestration patterns accessible via `/` commands |
-| Subagent extension | `.pi/agent/extensions/subagent/index.ts` | Plumbing: process spawn, output capture, streaming, error handling |
+| Subagent extension | `npm:@tintinweb/pi-subagents` | Plumbing: `Agent`, `get_subagent_result`, `steer_subagent`, `SubagentWorkflow` tools + FleetView, live widget, background agents |
 | Skills | `.pi/agent/skills/*/SKILL.md` | On-demand specialised instructions (loaded when task matches) |
 
 ### What's working
@@ -129,24 +137,29 @@ on Sonnet.
 |---|-----|-------------|-------------------|--------|
 | 1 | Cost guidance / inline-or-subagent | `APPEND_SYSTEM.md` — expand tool selection table | — | ✅ Done |
 | 2 | Task sizing | `APPEND_SYSTEM.md` (heuristic) + scout output format (size targets per thoroughness) | — | ✅ Done |
-| 3 | Context transfer | Agent definitions — output contracts expanded with Handoff sections | Chain prompts reinforce handoff structure | ✅ Done |
+| 3 | Context transfer | Agent definitions — output contracts expanded with Handoff sections | Chain prompts reinforce handoff structure. Output capping now via `@tintinweb/pi-subagents` `maxOutput` + `SubagentWorkflow` | ✅ Done (via @tintinweb/pi-subagents) |
 | 4 | Inline vs delegate rule | `APPEND_SYSTEM.md` — add to decision table or as a rule | — | ✅ Done |
 | 5 | Debug subagent | New `debugger.md` agent definition + new `debug-agent.md` workflow prompt | — | ✅ Done |
-| 6 | State sync | `APPEND_SYSTEM.md` — instruction rule | Extension: track mutated files and return their paths | ❌ Pending |
+| 6 | State sync | `APPEND_SYSTEM.md` — instruction rule | Extension: `@tintinweb/pi-subagents` captures `changed-files` in acceptance evidence + tool call arguments contain file paths | ✅ Done (via @tintinweb/pi-subagents) |
 | 7 | Model tiering economics | `APPEND_SYSTEM.md` — note next to model assignment rules | — | ✅ Done |
 
 Items 1, 2, 4, 7 were bundled into one pass and applied to `APPEND_SYSTEM.md`.
 The fork tool (`pi-fork` package) was removed entirely — uninstalled from
 `settings.json` and all references stripped from `APPEND_SYSTEM.md`.
 
-## Proposed order of work
+## Proposed order of work (completed)
 
 1. **`APPEND_SYSTEM.md` bundle** — gaps 1, 2, 4, 7 together. Single file, highest
    leverage, no code changes. ✅ Done
 2. **Debug subagent** — gap 5. New standalone agent, minimal risk. ✅ Done
 3. **Context transfer discipline** — gap 3. Update workflow prompts + agent definitions
    with Handoff contracts. ✅ Done
-4. **Extension changes** — gaps 3 (chain output cap) and 6 (mutation tracking).
-   Requires TypeScript changes to `extensions/subagent/index.ts`.
-5. **State sync rule** — gap 6 instruction component. Simple addition to
-   `APPEND_SYSTEM.md` once the extension returns mutated file paths.
+4. **Extension swap** — gaps 3 (output capping) and 6 (mutation tracking).
+   Replaced custom `extensions/subagent/` with `npm:@tintinweb/pi-subagents`.
+   ✅ Done
+5. **State sync rule** — gap 6 instruction component. Added to `APPEND_SYSTEM.md` as
+   part of the Rules section. ✅ Done
+
+All gaps resolved. The custom extension has been retired in favour of the public
+`@tintinweb/pi-subagents` package, which provides structured output evidence,
+background agents, FleetView observability, and scripted workflow orchestration.
