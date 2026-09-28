@@ -24,6 +24,10 @@ think?", "Any ideas?" are not change instructions — they are analysis requests
 Only proceed with changes when the user says something like "do it", "implement",
 "make the change", or gives a concrete task that implies modification.
 
+When the user says "I got this error" or reports an error without asking for a
+fix, explain the error. Investigate first when needed, but do not modify files
+until the user explicitly asks to fix it.
+
 When unsure, ask: "Should I proceed with implementing this, or do you want to
 review the plan first?"
 

@@ -118,10 +118,12 @@ export default function (pi: ExtensionAPI) {
 
 			// Resume: inject a continuation message
 			if (goal) {
-				pi.sendUserMessage(`Continue working toward the goal: ${goal}`).catch((err) => {
+				try {
+					pi.sendUserMessage(`Continue working toward the goal: ${goal}`);
+				} catch (err) {
 					console.error("[/goal] retry sendUserMessage failed:", err);
 					clearGoal();
-				});
+				}
 			}
 		}, delay);
 
@@ -136,17 +138,13 @@ export default function (pi: ExtensionAPI) {
 	pi.on("before_agent_start", async (event, _ctx) => {
 		if (!goal) return;
 
-		// Append a goal guideline entry to the system prompt sections
-		event.entries.push({
-			type: "guidelines",
-			label: "Goal",
-			guidelines: [
-				`You are working toward this goal: ${goal}`,
-				"At the end of each turn, evaluate your progress.",
-				`If the goal is fully met, end your response with exactly: [GOAL_MET]`,
-				"If it is not yet met, continue working — do not include [GOAL_MET].",
-			],
-		});
+		// Prompt options are mutable, so this preserves Pi's structured prompt updates.
+		event.systemPromptOptions.promptGuidelines.push(
+			`Goal: You are working toward this goal: ${goal}`,
+			"At the end of each turn, evaluate your progress.",
+			"If the goal is fully met, end your response with exactly: [GOAL_MET]",
+			"If it is not yet met, continue working. Do not include [GOAL_MET].",
+		);
 	});
 
 	// ── turn_end: evaluate progress, continue or stop ──────────────
@@ -237,10 +235,12 @@ export default function (pi: ExtensionAPI) {
 			// Inject the goal prompt as a user message to kick things off
 			// The turn_end handler will drive subsequent turns via { continue: true }
 			if (goal) {
-				pi.sendUserMessage(`I have set a goal: ${goal}`).catch((err) => {
+				try {
+					pi.sendUserMessage(`I have set a goal: ${goal}`);
+				} catch (err) {
 					console.error("[/goal] initial sendUserMessage failed:", err);
 					clearGoal();
-				});
+				}
 			}
 		},
 	});
