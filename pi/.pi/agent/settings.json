@@ -4,7 +4,6 @@
   "packages": [
     "npm:pi-catppuccin-tui",
     "npm:@juicesharp/rpiv-ask-user-question",
-    "git:github.com/MasuRii/pi-rtk-optimizer",
     "git:github.com/elpapi42/pi-observational-memory",
     "npm:@tintinweb/pi-subagents"
   ],
