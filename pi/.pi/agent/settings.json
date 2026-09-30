@@ -3,7 +3,6 @@
   "tuiMode": "fullscreen",
   "packages": [
     "npm:pi-catppuccin-tui",
-    "npm:@juicesharp/rpiv-ask-user-question",
     "git:github.com/elpapi42/pi-observational-memory",
     "npm:@tintinweb/pi-subagents"
   ],
@@ -16,5 +15,5 @@
   "extensions": [
     "extensions/pi-model-aliases"
   ],
-  "lastChangelogVersion": "0.87.1"
+  "lastChangelogVersion": "0.99.1"
 }
